@@ -59,7 +59,8 @@
                 </div>
                 <div class="form-group">
                     <label for="mobile">Mobile No</label>
-                    <input type="text"  class="form-control" name="mobile" id="mobile" >
+                    <input type="text"  class="form-control" name="mobile" id="mobile"  maxlength="12" 
+                    value="+94" required pattern="\+94\d{9}" title="Please enter a valid mobile number starting with +94 and followed by 9 digits.">
                 </div>
                <!--  <div class="form-group">
                     <label for="office">Office No</label>
@@ -93,18 +94,18 @@
                     <input type="checkbox" class="sup_icheck"  name="issale" id="issale" value="1">
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="isactive">Is Technician </label>
-                    <input type="checkbox" class="sup_icheck"  name="istec" id="istec" value="1">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                   <label for="isactive">Is Account </label>
-                    <input type="checkbox" class="sup_icheck"  name="isacc" id="isacc" value="1">
-                </div>
-            </div>
+<!--            <div class="col-md-3">-->
+<!--                <div class="form-group">-->
+<!--                    <label for="isactive">Is Technician </label>-->
+<!--                    <input type="checkbox" class="sup_icheck"  name="istec" id="istec" value="1">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-3">-->
+<!--                <div class="form-group">-->
+<!--                   <label for="isactive">Is Account </label>-->
+<!--                    <input type="checkbox" class="sup_icheck"  name="isacc" id="isacc" value="1">-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
     </div>
@@ -127,10 +128,25 @@
             data: $(this).serializeArray(),
             success: function (data) {
                 if (data == 1) {
+                    $.notify("Employee Added Successfully..!", "success");
                     $('#suppliermodal').modal('hide');
-                    location.relaod();
+                }else{
+                    $.notify("Error..!", "warning");
                 }
             }
         });
+    });
+
+    const mobileInput = document.getElementById('mobile');
+
+    mobileInput.addEventListener('input', function () {
+
+        if (!this.value.startsWith('+94')) {
+            this.value = '+94';
+        } else {
+
+            let digitsOnly = this.value.substring(3).replace(/\D/g, '');
+            this.value = '+94' + digitsOnly.substring(0, 9);
+        }
     });
 </script>

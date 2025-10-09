@@ -93,40 +93,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="box-body  table-responsive">
                         <table id="saletable" class="table table-bordered  table-hover">
                             <thead>
-                                <tr style="font-size: large">
+                                <tr style="background-color: #1fbfb8">
+
                                     <td>#</td>
                                     <!-- <td>Date</td> -->
-                                    <td>Product Code</td>
-                                    <td>Product Name</td>
-                                    <td>Qty</td>
-                                    <td>Free Qty</td>
-                                    <td>Cost Price</td>
-                                    <td>Total Amount</td>
-                                    <td>Discount</td>
-                                    <td>Total Net</td>
-                                    <td>Selling Price</td>
+                                    <td>PRODUCT CODE</td>
+                                    <td>PRODUCT NAME</td>
+                                    <td>QTY</td>
+                                    <td>FREE QTY</td>
+                                    <td>COST PRICE</td>
+                                    <td>TOTAL AMOUNT</td>
+                                    <td>DISCOUNT</td>
+                                    <td>TOTAL NET</td>
+                                    <td>SELLING PRICE</td>
                                     <!-- <td>Profit</td>
                                     <td>User</td>
                                     <td>Stock In</td> -->
-                                    <td>Is Cancel</td>
-                                    <td>Serial no</td>
+                                    <td>IS CANCEL</td>
+<!--                                    <td>Serial no</td>-->
                                 </tr>
                             </thead>
                             <tbody>
                             </tbody>
                             <tfoot>
-                                <tr style='background-color:#3c8dbc;color:#fff;'>
+                                <tr>
                                     <!-- <td></td> -->
                                     <td></td>
                                     <td></td>
                                     <td><b>Total</b></td>
-                                    <td id="totalstock"></td>
+                                    <td id="totalstock" style="text-align: right;font-weight:bold;color: #00aaf1;"></td>
                                     <td></td>
                                     <td></td>
-                                    <td id="totalvalue"></td>
-                                    <td id="totaldis"></td>
-                                    <td id="totalprofit"></td>
-                                    <td></td><td></td><td></td>
+                                    <td id="totalvalue" style="text-align: right;font-weight:bold;color: #00aaf1;"></td>
+                                    <td id="totaldis" style="text-align: right;font-weight:bold;color: #00aaf1;"></td>
+                                    <td id="totalprofit" style="text-align: right;font-weight:bold;color: #00aaf1;"></td>
+                                    <td></td><td></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -317,6 +318,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     var totalCostValue=0;
      var totalValue=0;
      var totalProfit=0;
+    var totalDis=0;
     function drawTable(data) {
         var gr_qty = 0;
         var gr_net = 0;
@@ -329,6 +331,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         $("#totalvalue").html(0);
         $("#totalprofit").html(0);
         $("#totalstock").html(0);
+        $("#totaldis").html(0);
         $.each(data, function(key, value) {
             $("#saletable").append("<tr  ><td colspan='12'><b>"+key+"</b></td></tr>");
                 for (var i = 0; i < value.length; i++) {
@@ -347,7 +350,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     $("#totalprofit").html(accounting.formatMoney(totalProfit));
                     $("#totalstock").html(accounting.formatMoney(totalStock));
                     if (i == (value.length - 1)) {
-                        $("#saletable").append("<tr style='background-color:#A9A9A9;color:#fff;'><td colspan='3' >Total</td><td>" + accounting.formatMoney(gr_qty) + "</td><td><b></b></td><td class='cos'></td><td><b></b></td><td><b></b></td><td><b>" + accounting.formatMoney(gr_net) + "</b></td><td><b></b></td><td></td><td><b></b></td></tr>");
+                        $("#saletable").append("<tr style='background-color:#A9A9A9;color:#fff;'><td colspan='3' >Total</td><td>" + accounting.formatMoney(gr_qty) + "</td><td><b></b></td><td class='cos'></td><td><b></b></td><td><b></b></td><td><b>" + accounting.formatMoney(gr_net) + "</b></td><td><b></b></td><td></td></tr>");
                         $("#saletable").append("<tr><td colspan='12'>&nbsp;</td></tr>");
                         gr_qty = 0;
                         gr_net = 0;
@@ -355,7 +358,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             }
         });
     }
-    
+
     function drawRow(rowData,index) {
     
        if(parseFloat(rowData[index].Stock) < rowData[index].Prd_ROL){
@@ -389,7 +392,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         row.append($("<td>" + rowData[index].GRN_NetAmount + "</td>"));
         row.append($("<td>" + rowData[index].GRN_Selling + "</td>"));
         row.append($("<td>" + cancel + "</td>"));
-        row.append($("<td>" + rowData[index].SerialNo + "</td>"));  
+
     }
     function printdiv() {
         $("#saletable").print({

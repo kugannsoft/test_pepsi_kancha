@@ -16,21 +16,21 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="product" class="control-label">Part No <span class="required">*</span></label>
-                            <input type="text" class="form-control" value="<?php echo $product->Cus_PrdCode; ?>" required="required"  name="part_no" id="part_no" placeholder="Enter Part No">
+                            <input type="text" class="form-control" value="<?php echo $product->Cus_PrdCode; ?>"   name="part_no" id="part_no" placeholder="Enter Part No">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="product" class="control-label">Mercedes Part No <span class="required">*</span></label>
-                    <input type="text" class="form-control" required="required" value="<?php echo $product->OrgPartNo; ?>"  name="orgpart_no" id="orgpart_no" placeholder="Enter Mercedes Part No">
+                    <input type="text" class="form-control" value="<?php echo $product->OrgPartNo; ?>"  name="orgpart_no" id="orgpart_no" placeholder="Enter Mercedes Part No">
                 </div>
                 <div class="form-group">
                     <label for="product" class="control-label">Name <span class="required">*</span></label>
                     <input type="text" class="form-control" required="required" value="<?php echo $product->Prd_Description ?>"  name="productname" id="product" placeholder="Enter product name">
                 </div>
                 <div class="form-group">
-                    <label for="remark" class="control-label">Appear name</label>
-                    <input class="form-control" name="appearname"  id="appearname" value="<?php echo $product->Prd_AppearName ?>" placeholder="Enter appear name"/>
+                    <label for="remark" class="control-label">Invoice name</label>
+                    <input class="form-control" name="appearname"  id="appearname" value="<?php echo $product->Prd_AppearName ?>" placeholder="Enter Invoice name"/>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -198,12 +198,7 @@
                                 Is Open Price
                             </label>
                         </div>
-                        <div class="form-group">
-                            <label for="ispromotion" class="control-label">
-                                <input class="prd_icheck" type="checkbox" name="ispromotion" value="1" <?php echo ($product->IsPromotions == 1) ? 'checked' : '' ?>> 
-                                Is Promotion
-                            </label>
-                        </div>
+                        
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
@@ -213,25 +208,31 @@
                             </label>
                         </div>
                         <div class="form-group">
+                            <label for="ispromotion" class="control-label">
+                                <input class="prd_icheck" type="checkbox" name="ispromotion" value="1" <?php echo ($product->IsPromotions == 1) ? 'checked' : '' ?>> 
+                                Is Stock Report
+                            </label>
+                        </div>
+                        <!-- <div class="form-group">
                             <label for="isserialno" class="control-label">
                                 <input class="prd_icheck" type="checkbox" name="isserialno" value="1" <?php echo ($product->IsSerial == 1) ? 'checked' : '' ?>> 
                                 Is Serial No
                             </label>
-                        </div>
-                        <div class="form-group">
+                        </div> -->
+                        <!-- <div class="form-group">
                             <label for="israwmaterial" class="control-label">
                                 <input class="prd_icheck" type="checkbox" name="israwmaterial" value="1" <?php echo ($product->IsRawMaterial == 1) ? 'checked' : '' ?>> 
                                 Is Raw Mtr
                             </label>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-md-4">
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="isfraction" class="control-label">
                                 <input class="prd_icheck" type="checkbox" name="isfraction" value="1" <?php echo ($product->IsFraction == 1) ? 'checked' : '' ?>> 
                                 Is Fraction
                             </label>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label for="isfreeissue" class="control-label">
                                 <input class="prd_icheck" type="checkbox" name="isfreeissue" value="1" <?php echo ($product->IsFreeIssue == 1) ? 'checked' : '' ?>> 
@@ -330,22 +331,25 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="costprice" class="control-label">Cost Price<span class="required">*</span></label>
-                                <?php if (in_array("SM135", $blockView) || $blockView == null) { ?>
+                                <label for="costprice" class="control-label">Cost Price with VAT<span class="required">*</span></label>
                                 <input type="text" class="form-control"  name="costprice" id="costprice" value="<?php echo $product->Prd_CostPrice; ?>">
-                                <?php } ?>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="averagecost" class="control-label">Average Cost<span class="required">*</span></label>
+                                <input type="text" class="form-control"  name="averagecost" id="averagecost"  value="<?php echo $product->Prd_AveragecostPrice; ?>" readonly>
                             </div>
                         </div>
                         <div class="col-md-6">
 
                             <div class="form-group">
-                                <label for="setaprice" class="control-label">Set a Price<span class="required">*</span></label>
+                                <label for="setaprice" class="control-label">Selling Price with VAT<span class="required">*</span></label>
                                 <input type="text" class="form-control"  name="setaprice" id="setaprice" value="<?php echo $product->Prd_SetAPrice; ?>">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="pricelevel" class="control-label">Price level <span class="required">*</span></label>
+                        <label for="pricelevel" class="control-label">Price level with VAT<span class="required">*</span></label>
                         <select class="form-control"  required="required" name="pricelevel" id="pricelevel">
                             <option value="0">-Select a Price level-</option>
                             <?php foreach ($ploption AS $pl) { ?>
@@ -369,7 +373,7 @@
                                 <tr>
                                     <td><?php echo $pldata->PL_No ?></td>
                                     <td><?php echo $pldata->PriceLevel ?></td>
-                                    <td><input type="number" step="any" class="form-control" name="pl[<?php echo $pldata->PL_No ?>]" value="<?php echo $pldata->ProductPrice ?>"/></td>
+                                    <td><input type="number" class="form-control" name="pl[<?php echo $pldata->PL_No ?>]" value="<?php echo $pldata->ProductPrice ?>"/></td>
                                     <td><span value="<?php echo $pldata->PL_No ?>" class="btn btn-danger delete">x</span></td>
                                 </tr>
                                 <script> item.push(<?php echo $pldata->PL_No ?>);</script>
@@ -379,7 +383,32 @@
                         <?php // print_r($productpl); ?>
                     </div>
                 </div>
+<br/>
+                <div class="pricelevelChangearea">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="costprice" class="control-label">Select Selling Price Level</label>
+                                <select class="form-control"  name="pricestock" id="pricestock">
+                                    <option value="0">-Select Selling Price Level-</option>
+                                    <?php foreach ($productStockpls AS $productStockpl) { ?>
+                                        <option value="<?php echo $productStockpl->Price ?>"><?php echo $productStockpl->Price ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
 
+                            <div class="form-group">
+                                <label for="averagecost" class="control-label">Replace Selling Price</label>
+                                <input type="text" class="form-control"  name="newpricestock" id="newpricestock"  value="">
+                            </div>
+                            <div class="form-group">
+                                <button type="button"  name="setStockprice" id="setStockprice">Change </button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                   
+                </div>
                 <div class="form-group">
                     <label for="proDate" class="control-label"> <span class="required">*</span></label>
                     <input type="hidden" class="form-control" name="proDate" id="proDate" value="<?php echo $product->Prd_Date; ?>"/>
@@ -694,7 +723,7 @@
     $('body').on('change', '#pricelevel', function() {
         var i = $(this).val();
         if (i > 0 && item.indexOf(i) == -1) {
-            $('#pltbldata').append("<tr><td>" + i + "</td><td>" + $('#pricelevel option:selected').attr('val2') + "</td><td><input type='number' step='any' class='form-control' name='pl[" + i + "]'></td><td><span value='" + i + "' class='btn btn-danger delete'>x</span></td></tr>");
+            $('#pltbldata').append("<tr><td>" + i + "</td><td>" + $('#pricelevel option:selected').attr('val2') + "</td><td><input type='number' class='form-control' name='pl[" + i + "]'></td><td><span value='" + i + "' class='btn btn-danger delete'>x</span></td></tr>");
             item.push(i);
         }
         $(this).val('0');
@@ -1206,5 +1235,43 @@
         $("#loc_array").val(JSON.stringify(loc_array));
         $("#rack_array").val(JSON.stringify(rack_array));
         $("#bin_array").val(JSON.stringify(bin_array));
+    });
+
+   
+    $('#setStockprice').on('click', function () {
+       let productCode = $('#productCode').val();
+        let costprice = $('#costprice').val();
+        let costprice1 = parseFloat(costprice); 
+        let oldPrice = $('#pricestock').val();
+        let newPrice = $('#newpricestock').val();
+        let newPrice2 = parseFloat(newPrice); 
+        
+        
+        if (oldPrice == "0" || newPrice == "") {
+            $.notify("Please select a price level and enter a new amount.","warning");
+            return;
+        }
+
+         if (costprice1 > newPrice2) {
+            $.notify("Please Enter price level morethan costprice.","warning");
+            return;
+        }
+
+        $.ajax({
+            url: "<?php echo base_url('admin/product/updatenewsellingprice/') ?>", 
+            type: "POST",
+            data: {
+                productCode: productCode,
+                old_price: oldPrice,
+                new_price: newPrice
+            },
+            success: function (response) {
+                $.notify('Price updated successfully.',"success"); 
+                window.location.reload();
+            },
+            error: function () {
+                 $.notify('Something went wrong while updating the price.',"warning");
+            }
+        });
     });
 </script>

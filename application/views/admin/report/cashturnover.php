@@ -47,22 +47,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-md-12">
                 <div class="box box-default">
                     <div class="box-body table-responsive">
-<!--                        <b>Balance</b> : <span id='startBal' style='font-weight:bold;font-size:20px;'></span>-->
+                        <!--                        <b>Balance</b> : <span id='startBal' style='font-weight:bold;font-size:20px;'></span>-->
                         <table id="saletable" class="table table-bordered">
                             <thead>
-                            <tr>
+                            <tr style="background-color: #1fbfb8">
                                 <td>Date</td>
                                 <td>Invoice No</td>
                                 <td>Customer No</td>
                                 <td>Job Description</td>
-<!--                                <td>Amount</td>-->
+                                <!--                                <td>Amount</td>-->
                                 <td>Cash</td>
-<!--                                <td>Card</td>-->
-<!--                                <td>Cheque</td>-->
-<!--                                <td>Bank</td>-->
-<!--                                <td>Oder Advance</td>-->
-<!--                                <td>Advance</td>-->
-<!--                                <td>Credit</td>-->
+                                <!--                                <td>Card</td>-->
+                                <!--                                <td>Cheque</td>-->
+                                <!--                                <td>Bank</td>-->
+                                <!--                                <td>Oder Advance</td>-->
+                                <!--                                <td>Advance</td>-->
+                                <!--                                <td>Credit</td>-->
 
                             </tr>
                             </thead>
@@ -74,14 +74,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <th></th>
                                 <th></th>
                                 <th></th>
-<!--                                <th id="totalpsale" style="text-align: right;color: #00aaf1;"></th>-->
+                                <!--                                <th id="totalpsale" style="text-align: right;color: #00aaf1;"></th>-->
                                 <th id="totalpcash" style="text-align: right;color: #00aaf1;"></th>
-<!--                                <th id="totalpcard" style="text-align: right;color: #00aaf1;"></th>-->
-<!--                                <th id="totalpcheque" style="text-align: right;color: #00aaf1;"></th>-->
-<!--                                <th id="totalpbank" style="text-align: right;color: #00aaf1;"></th>-->
-<!--                                <th id="totalorderadvance" style="text-align: right;color: #00aaf1;"></th>-->
-<!--                                <th id="totalpadvance" style="text-align: right;color: #00aaf1;"></th>-->
-<!--                                <th id="totalpcredit" style="text-align: right;color: #00aaf1;"></th></tr>-->
+                                <!--                                <th id="totalpcard" style="text-align: right;color: #00aaf1;"></th>-->
+                                <!--                                <th id="totalpcheque" style="text-align: right;color: #00aaf1;"></th>-->
+                                <!--                                <th id="totalpbank" style="text-align: right;color: #00aaf1;"></th>-->
+                                <!--                                <th id="totalorderadvance" style="text-align: right;color: #00aaf1;"></th>-->
+                                <!--                                <th id="totalpadvance" style="text-align: right;color: #00aaf1;"></th>-->
+                                <!--                                <th id="totalpcredit" style="text-align: right;color: #00aaf1;"></th></tr>-->
                             </tfoot>
                         </table>
                         <table id="saletablex" class="table table-bordered">
@@ -95,113 +95,113 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             </tr>
                             </thead>
                             <tbody>
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>No of New Customers </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="noofnewcus" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>No of Existing Customers  </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="noofrepcus" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>No Of New Jobs</td>-->
-<!--                                <td></td>-->
-<!--                                <td id="noofnewjob" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>No of Complete Jobs </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="noofcomjob" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>No of Pending Jobs</td>-->
-<!--                                <td></td>-->
-<!--                                <td id="noofpendingjob" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>No of Over Due Jobs </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="noofoverjob" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr><td colspan="5">&nbsp;</td></tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Start Cash Float  </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="startfloat" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr><td colspan="5">Complete Jobs Payment Summary</td></tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Cash Jobs  *</td>-->
-<!--                                <td></td>-->
-<!--                                <td id="cashjob" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Card Jobs  </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="cardjob" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Order Advanced Jobs  </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="orderadvancejob" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Advanced Jobs  </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="advancejob" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Credit Jobs </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="creditjob" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Cheque Jobs </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="chequejob" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Bank Jobs </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="bankjob" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Return Jobs *</td>-->
-<!--                                <td></td>-->
-<!--                                <td id="returnjob" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>No of New Customers </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="noofnewcus" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>No of Existing Customers  </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="noofrepcus" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>No Of New Jobs</td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="noofnewjob" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>No of Complete Jobs </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="noofcomjob" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>No of Pending Jobs</td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="noofpendingjob" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>No of Over Due Jobs </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="noofoverjob" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr><td colspan="5">&nbsp;</td></tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Start Cash Float  </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="startfloat" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr><td colspan="5">Complete Jobs Payment Summary</td></tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Cash Jobs  *</td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="cashjob" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Card Jobs  </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="cardjob" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Order Advanced Jobs  </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="orderadvancejob" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Advanced Jobs  </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="advancejob" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Credit Jobs </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="creditjob" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Cheque Jobs </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="chequejob" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Bank Jobs </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="bankjob" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Return Jobs *</td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="returnjob" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
                             <!-- <tr>
                                 <td></td>
                                 <td>Customer Payment (Cash) </td>
@@ -209,96 +209,96 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <td id="customerpay" class="text-right"></td>
                                 <td></td>
                             </tr>  -->
-<!--                            <tr><td colspan="5">&nbsp;</td></tr>-->
-<!--                            <tr><td colspan="5">Payment Summary</td></tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Supplier Payments  </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="suppayment" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr><td colspan="5">&nbsp;</td></tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Employee Advance Payments  </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="salaryadvance" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Cash Out * </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="totalcashOut" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Cash In * </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="totalcashIn" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Expenses  *</td>-->
-<!--                                <td></td>-->
-<!--                                <td id="expOut" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Earning * </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="expIn" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr><td colspan="5">-->
-<!--                                    <table id="saletable2" class="table table-bordered">-->
-<!--                                        <thead>-->
-<!--                                        <tr>-->
-<!--                                            <td style="width:20px;"></td>-->
-<!--                                            <td style="width:150px;"></td>-->
-<!--                                            <td style="width:50px;"> In</td>-->
-<!--                                            <td style="width:100px;"> Out</td>-->
-<!--                                            <td style="width:100px;"></td>-->
-<!--                                        </tr>-->
-<!--                                        </thead>-->
-<!--                                        <tbody>-->
-<!--                                        </tbody>-->
-<!--                                    </table>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Day End Cash Float </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="endFlaot" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Cash Balance </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="balance" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Diffrence </td>-->
-<!--                                <td></td>-->
-<!--                                <td id="dif" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
-<!--                            <tr><td colspan="5">&nbsp;</td></tr>-->
-<!--                            <tr>-->
-<!--                                <td></td>-->
-<!--                                <td>Operated Cashier</td>-->
-<!--                                <td></td>-->
-<!--                                <td id="cashier" class="text-right"></td>-->
-<!--                                <td></td>-->
-<!--                            </tr>-->
+                            <!--                            <tr><td colspan="5">&nbsp;</td></tr>-->
+                            <!--                            <tr><td colspan="5">Payment Summary</td></tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Supplier Payments  </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="suppayment" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr><td colspan="5">&nbsp;</td></tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Employee Advance Payments  </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="salaryadvance" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Cash Out * </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="totalcashOut" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Cash In * </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="totalcashIn" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Expenses  *</td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="expOut" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Earning * </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="expIn" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr><td colspan="5">-->
+                            <!--                                    <table id="saletable2" class="table table-bordered">-->
+                            <!--                                        <thead>-->
+                            <!--                                        <tr>-->
+                            <!--                                            <td style="width:20px;"></td>-->
+                            <!--                                            <td style="width:150px;"></td>-->
+                            <!--                                            <td style="width:50px;"> In</td>-->
+                            <!--                                            <td style="width:100px;"> Out</td>-->
+                            <!--                                            <td style="width:100px;"></td>-->
+                            <!--                                        </tr>-->
+                            <!--                                        </thead>-->
+                            <!--                                        <tbody>-->
+                            <!--                                        </tbody>-->
+                            <!--                                    </table>-->
+                            <!--                                </td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Day End Cash Float </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="endFlaot" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Cash Balance </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="balance" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Diffrence </td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="dif" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
+                            <!--                            <tr><td colspan="5">&nbsp;</td></tr>-->
+                            <!--                            <tr>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td>Operated Cashier</td>-->
+                            <!--                                <td></td>-->
+                            <!--                                <td id="cashier" class="text-right"></td>-->
+                            <!--                                <td></td>-->
+                            <!--                            </tr>-->
 
                             </tbody>
                         </table>

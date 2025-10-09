@@ -49,17 +49,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             
                     <br>
                     <form id="form1"  action="">
-                    <div class="col-md-1">
-                        <div class="form-group">
-                            <label for="isall" class="control-label">
-                                <input class="rpt_icheck" type="checkbox" name="isall" <?php if(isset($_REQUEST['isall'])){ ?> checked <?php } ?>> All</label>
-                        </div>
-                    </div>
+<!--                    <div class="col-md-1">-->
+<!--                        <div class="form-group">-->
+<!--                            <label for="isall" class="control-label">-->
+<!--                                <input class="rpt_icheck" type="checkbox" name="isall" --><?php //if(isset($_REQUEST['isall'])){ ?><!-- checked --><?php //} ?><!--</label>-->
+<!--                       </div>-->
+<!--                    </div>-->
                     <div class="row">
                         <div class="col-lg-3">
                             <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
                         <i class="fa fa-calendar"></i>&nbsp;
-                        <span></span> 
+                        <span></span>
                         <i class="fa fa-caret-down"></i>
                         <input type="hidden" name="startdate" id="startdate" >
                         <input type="hidden" name="enddate" id="enddate" >
@@ -69,9 +69,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="col-md-1">
                         <button type="submit"  id="btnShow" class="btn btn-flat btn-success">Show</button>
                     </div>
-                    <div class="col-md-1">
-                        <button type="submit" id="btnPdf" class="btn btn-flat btn-success">PDF</button>
-                    </div>
+<!--                    <div class="col-md-1">-->
+<!--                        <button type="submit" id="btnPdf" class="btn btn-flat btn-success">PDF</button>-->
+<!--                    </div>-->
                     </div>
                   </form>
                     

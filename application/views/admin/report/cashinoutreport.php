@@ -67,11 +67,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="box-body table-responsive">
                         <table id="saletable" class="table table-bordered">
                             <thead>
-                                <tr>
+                            <tr style="background-color: #1fbfb8">
                                     <td>Float No</td>
                                     <td>Date</td>
                                     <td>Expense Type</td>
                                     <td>Remark</td>
+                                    <td>Mode</td>
                                     <td>Expense Amount</td>
                                     <td>Earning Amount</td>
                                     <td>User</td>
@@ -85,6 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <th id="totalca" style="text-align: right;color: #00aaf1;"></th>
                                     <th id="totalcra" style="text-align: right;color: #00aaf1;"></th>
                                     <th id="totalcrda" style="text-align: right;color: #00aaf1;"></th>
+                                    <th id="totalcrdab" style="text-align: right;color: #00aaf1;"></th>
                                     <th id="totalcha" style="text-align: right;color: #00aaf1;"></th>
                                     <th id="totalcoa" style="text-align: right;color: #00aaf1;"></th>
                                     <th id="totala" style="text-align: right;color: #00aaf1;"></th>
@@ -157,11 +159,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
         row.append($("<td class='cashamount' align='right'>" + (rowData.InOutID) + "</td>"));
         row.append($("<td class='creditamount' align='right'>" + (rowData.InOutDate) + "</td>"));
+        row.append($("<td class='creditamount' align='right'>" + (rowData.TransactionName) + "</td>"));
         row.append($("<td class='ccardamount' align='right'>" + (rowData.Remark) + "</td>"));
         row.append($("<td class='chequeamount' align='right'>" +(rowData.Mode) + "</td>"));
         row.append($("<td class='totalamount' align='right'>" + accounting.formatMoney(exp) + "</td>"));
         row.append($("<td class='totalneta' align='right'>" + accounting.formatMoney(earn) + "</td>"));
-        row.append($("<td class='disamount' align='right'>" + accounting.formatMoney(rowData.first_name) + "</td>"));
+        row.append($("<td class='disamount' align='right'>" + (rowData.first_name) + "</td>"));
         
     }
     function sumcolumn(rclass) {

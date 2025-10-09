@@ -96,16 +96,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="box-body  table-responsive">
                         <table id="saletable" class="table table-bordered  table-hover">
                             <thead>
-                                <tr style="font-size: large">
-                                    <td>id</td>
-                                    <td>Product Code</td>
-                                    <td>Product Name</td>
-                                    <td>Location</td>
-                                    <td>Stock</td>
+                            <tr style="background-color: #1fbfb8">
+                                    <td>ID</td>
+                                    <td>PRODUCT CODE</td>
+                                    <td>PRODUCT NAME</td>
+                                    <td>LOCATION</td>
+                                    <td>STOCK</td>
                                     <td>ROL</td>
                                     <td>ROQ</td>
-                                    <td>Cost Price</td>
-                                    <td>Supplier</td>
+                                    <td>COST PRICE</td>
+                                    <td>SUPPLIER</td>
                                 </tr>
                             </thead>
                             <tbody>

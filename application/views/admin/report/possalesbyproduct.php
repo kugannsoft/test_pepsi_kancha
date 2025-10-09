@@ -13,7 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="col-md-12">
                 <div class="box box-default">
                     <div class="box-body">
-                        <div class="row">
+
                             <form id="filterform">
                                 <div class="row">
                                 <div class="input-daterange input-group" id="datepicker">
@@ -28,20 +28,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <i class="fa fa-caret-down"></i>
                                     </div>
                                 </div>
+                                    <div class="col-md-1">
+                                        <div class="form-group">
+                                            <label for="isall" class="control-label">
+                                                <input class="rpt_icheck" type="checkbox" name="isall" <?php if(isset($_REQUEST['isall'])){ ?> checked <?php } ?>> All</label>
+                                        </div>
+                                    </div>
 
-                                <div class="col-md-2">
-                                    <select class="form-control" name="route" id="route" multiple="multiple">
-                                        <option value="">--select location--</option>
-                                        <?php foreach ($locations AS $loc) { ?>
-                                            <option value="<?php echo $loc->location_id ?>"><?php echo $loc->location ?></option>
-                                        <?php } ?>
-                                    </select>
-                                    <input type="hidden" name="route_ar" id="route_ar">
-                                </div>
+<!--                                <div class="col-md-2">-->
+<!--                                    <select class="form-control" name="route" id="route" multiple="multiple">-->
+<!--                                        <option value="">--select location--</option>-->
+<!--                                        --><?php //foreach ($locations AS $loc) { ?>
+<!--                                            <option value="--><?php //echo $loc->location_id ?><!--">--><?php //echo $loc->location ?><!--</option>-->
+<!--                                        --><?php //} ?>
+<!--                                    </select>-->
+<!--                                    <input type="hidden" name="route_ar" id="route_ar">-->
+<!--                                </div>-->
                                 <div class="col-md-2">
                                     <select class="form-control" name="salesperson" id="salesperson">
                                         <option value="">--select sales person--</option>
-                                        <?php foreach ($staff AS $loc) { ?>
+                                        <?php foreach ($salesperson AS $loc) { ?>
                                             <option value="<?php echo $loc->RepID ?>"><?php echo $loc->RepName ?></option>
                                         <?php } ?>
                                     </select>
@@ -49,8 +55,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <div class="col-md-2">
                                     <select class="form-control" name="inv_type" id="inv_type">
                                         <option value="">--select inv type--</option>
-                                        <option value="2">Tax</option>
-                                        <option value="1">General</option>
+<!--                                        <option value="2">Tax</option>-->
+                                        <option value="1">Cash</option>
                                         <option value="3">Credit</option>
                                     </select>
                                 </div>
@@ -102,7 +108,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <div class="col-md-1">
                                 <button onclick="printdiv()" class="btn btn-flat btn-default">Print</button>
                             </div>
-                                </div>
+
                         </div>
                     </div>
                 </div>
@@ -114,23 +120,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="box-body table-responsive">
                         <table id="saletable" class="table table-bordered">
                             <thead>
-                            <tr>
+                            <tr style="background-color: #1fbfb8">
                                 <td>Inv. Date</td>
                                 <td>Customer</td>
                                 <td>Inv No</td>
                                 <td>Product</td>
-<!--                                <td>Total Amount</td>-->
+                                <td>Qty</td>
                                 <td>Total Amount</td>
                                 <td>Dis Amount</td>
-                                <td>Vat Amount</td>
-                                <td>Nbt Amount</td>
-                                <td>net Amount</td>
-<!--                                <td>Card Amount</td>-->
-<!--                                <td>Cheque Amount</td>-->
-<!--                                <td>Advance Amount</td>-->
-<!--                                <td>Credit Amount</td>-->
-<!--                                <td>Return</td>-->
-<!--                                <td>Settled Amount</td>-->
+
+                                <td>Net Amount</td>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -141,19 +141,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <th></th>
                                 <th></th>
                                 <th></th>
-<!--                                <th id="totala" style="text-align: right;color: #00aaf1;"></th>-->
+                                 <th></th>
                                 <th id="totalca" style="text-align: right;color: #00aaf1;"></th>
-                                <th id="totaldia" style="text-align: right;color: #00aaf1;"></th>
-                                <th id="totalvata" style="text-align: right;color: #00aaf1;"></th>
-                                <th id="totalnbta" style="text-align: right;color: #00aaf1;"></th>                               
+                                <th id="totaldia" style="text-align: right;color: #00aaf1;"></th>                
                                 <th id="totalneta" style="text-align: right;color: #00aaf1;"></th>
                               
-<!--                                <th id="totalcrda" style="text-align: right;color: #00aaf1;"></th>-->
-<!--                                <th id="totalcha" style="text-align: right;color: #00aaf1;"></th>-->
-<!--                                <th id="totalada" style="text-align: right;color: #00aaf1;"></th>-->
-<!--                                <th id="totalcra" style="text-align: right;color: #00aaf1;"></th>-->
-<!--                                <th id="totalrt" style="text-align: right;color: #00aaf1;"></th>-->
-<!--                                <th id="totalsettlle" style="text-align: right;color: #00aaf1;"></th>-->
+
 
                             </tr>
                             <tr>
@@ -162,13 +155,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <td></td>
                                 <td></td>
                                 <td></td>
-<!--                                <td></td>-->
-<!--                                <td></td>-->
-<!--                                <td></td>-->
-<!--                                <td></td>-->
-<!--                                <td></td>-->
-<!--                                <td></td>-->
-<!--                                <td></td>-->
+                                 <th></th>
                                 <td colspan="4"></td>
                                 <td id="totalDue" style="color:#f00;font-weight:bold" colspan="2"></td>
                             </tr>
@@ -199,6 +186,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     $("#subcategory").select2({
         placeholder: "Select a model"
     });
+
+    $('.rpt_icheck').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
+        increaseArea: '50%'
+    });
+
 
     var sub = [];
     $("#subcategory").change(function() {
@@ -237,8 +231,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 $('#totalca').html(accounting.formatMoney(sumcolumn('cashamount')));
                 $('#totalcoa').html(accounting.formatMoney(sumcolumn('costamount')));
                 $('#totaldia').html(accounting.formatMoney(sumcolumn('disamount')));
-                $('#totalvata').html(accounting.formatMoney(sumcolumn('vatamount')));
-                $('#totalnbta').html(accounting.formatMoney(sumcolumn('nbtamount')));
+
                 $('#totalneta').html(accounting.formatMoney(sumcolumn('netamount')));
 
             }
@@ -261,11 +254,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         row.append($("<td><a href='<?php echo base_url() ?>admin/Salesinvoice/view_sales_invoice/"+Base64.encode(rowData.SalesInvNo)+"' >" + rowData.SalesInvNo + "</a></td>"));
         row.append($("<td class='' align='right'>" + rowData.ProName + "</td>"));
-
+         row.append($("<td class='' align='right'>" + rowData.SalesQty + "</td>"));
         row.append($("<td class='cashamount' align='right'>" + accounting.formatMoney(rowData.CashAmount) + "</td>"));
         row.append($("<td class='disamount' align='right'>" + accounting.formatMoney(rowData.DisAmount) + "</td>"));
-        row.append($("<td class='vatamount' align='right'>" + accounting.formatMoney(rowData.VatAmount) + "</td>"));
-        row.append($("<td class='nbtamount' align='right'>" + accounting.formatMoney(rowData.NbtAmount) + "</td>"));
+
         row.append($("<td class='netamount' align='right'>" + accounting.formatMoney(rowData.NetAmount) + "</td>"));
 
     }

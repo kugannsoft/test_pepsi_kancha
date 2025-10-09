@@ -50,6 +50,7 @@ $(document).ready(function() {
                 success: function(data)
                 {
                     var resultData = JSON.parse(data);
+                    console.log('resultData',resultData);
 
                     cusCode = resultData.cus_data.CusCode;
                     outstanding = (resultData.total_credit-resultData.total_payment-resultData.return_payment)+resultData.over_return__complete_payments;

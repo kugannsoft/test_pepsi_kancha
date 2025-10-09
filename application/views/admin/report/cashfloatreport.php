@@ -154,7 +154,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         var exp = 0;
         if(rowData[index].Mode=='Out'){
             earn = 0;exp=rowData[index].CashAmount;
-        }else if(rowData[index].IsExpenses=='In'){
+        }else if(rowData[index].Mode=='In'){
             exp = 0;earn=rowData[index].CashAmount;
         }
         row.append($("<td class='cashamount' align='right'>" + (rowData[index].InOutID) + "</td>"));

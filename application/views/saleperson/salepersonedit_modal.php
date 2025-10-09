@@ -98,23 +98,23 @@
             </div>
             <div class="row">
             <div class="col-md-3">
-            <div class="form-group">
-                    <label for="isactive">Is Sales </label>
-                    <input type="checkbox" class="sup_icheck" <?php if($saleperson->IsSalesPerson==1){?> checked  <?php } ?>  name="issale" id="issale" value="1">
-                </div>
+<!--            <div class="form-group">-->
+<!--                    <label for="isactive">Is Sales </label>-->
+<!--                    <input type="checkbox" class="sup_icheck" --><?php //if($saleperson->IsSalesPerson==1){?><!-- checked  --><?php //} ?><!--  name="issale" id="issale" value="1">-->
+<!--                </div>-->
                  </div>
-                <div class="col-md-3">
-                <div class="form-group">
-                    <label for="isactive">Is Technician </label>
-                    <input type="checkbox" class="sup_icheck" <?php if($saleperson->IsTec==1){?> checked  <?php } ?>  name="istec" id="istec" value="1">
-                </div>
-                 </div>
-                <div class="col-md-3">
-                <div class="form-group">
-                   <label for="isactive">Is Account </label>
-                    <input type="checkbox" class="sup_icheck"  <?php if($saleperson->IsAccount==1){?> checked  <?php } ?> name="isacc" id="isacc" value="1">
-                </div>
-                 </div>
+<!--                <div class="col-md-3">-->
+<!--                <div class="form-group">-->
+<!--                    <label for="isactive">Is Technician </label>-->
+<!--                    <input type="checkbox" class="sup_icheck" --><?php //if($saleperson->IsTec==1){?><!-- checked  --><?php //} ?><!--  name="istec" id="istec" value="1">-->
+<!--                </div>-->
+<!--                 </div>-->
+<!--                <div class="col-md-3">-->
+<!--                <div class="form-group">-->
+<!--                   <label for="isactive">Is Account </label>-->
+<!--                    <input type="checkbox" class="sup_icheck"  --><?php //if($saleperson->IsAccount==1){?><!-- checked  --><?php //} ?><!-- name="isacc" id="isacc" value="1">-->
+<!--                </div>-->
+<!--                 </div>-->
                 </div>
         </div>
     </div>
@@ -141,5 +141,18 @@
                 }
             }
         });
+    });
+
+    const mobileInput = document.getElementById('mobile');
+
+    mobileInput.addEventListener('input', function () {
+
+        if (!this.value.startsWith('+94')) {
+            this.value = '+94';
+        } else {
+
+            let digitsOnly = this.value.substring(3).replace(/\D/g, '');
+            this.value = '+94' + digitsOnly.substring(0, 9);
+        }
     });
 </script>

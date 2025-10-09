@@ -57,12 +57,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <div class="col-md-3"><table class="table table-hover">
                                         <tbody>
                                         <tr><td>Customer No</td><td>:</td><td  id='mcash'  class='text-right'><?php echo $cus->CusBookNo?></td></tr>
-                                        <tr><td>Category</td><td>:</td><td  id='mcash'  class='text-right'><?php echo $cus->CusCategory?></td></tr>
+<!--                                        <tr><td>Category</td><td>:</td><td  id='mcash'  class='text-right'>--><?php //echo $cus->CusCategory?><!--</td></tr>-->
                                         <tr><td>Handel By</td><td>:</td><td  id='mcard'  class='text-right'><?php echo $cus->RepName?></td></tr>
                                         <tr><td>Payment</td><td>:</td><td  id='mcheque'  class='text-right'><?php echo $cus->payType?></td></tr>
-                                        <tr><td>Credit Period</td><td>:</td><td  id='mcredit'  class='text-right'><?php echo $cus->CreditPeriod?></td></tr>
+<!--                                        <tr><td>Credit Period</td><td>:</td><td  id='mcredit'  class='text-right'>--><?php //echo $cus->CreditPeriod?><!--</td></tr>-->
                                         <tr><td>Credit Limit</td><td>:</td><td  id='mcompany'  class='text-right'><?php echo $cus->CreditLimit?></td></tr>
-                                        <tr><td>Vat No</td><td>:</td><td  id='mcompany'  class='text-right'><?php echo $cus->VatNumber?></td></tr>
+<!--                                        <tr><td>Vat No</td><td>:</td><td  id='mcompany'  class='text-right'>--><?php //echo $cus->VatNumber?><!--</td></tr>-->
                                         </tbody>
                                     </table>
                                     <!--</div>-->
@@ -108,11 +108,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <ul  class="list-group">
 
                                         <?php if ($cus->IsActive == 1) { ?>
-                                            <a class="list-group-item" href="<?php echo base_url('admin/Salesinvoice/addSalesInvoice?cus=').$cus->CusCode; ?>" class="btn btn-xs btn-default"><b>Sales Invoice</b> <span class="pull-right"><i class="fa fa-plus "></i></span></a>
+<!--                                            <a class="list-group-item" href="--><?php //echo base_url('admin/Salesinvoice/addSalesInvoice?cus=').$cus->CusCode; ?><!--" class="btn btn-xs btn-default"><b>Sales Invoice</b> <span class="pull-right"><i class="fa fa-plus "></i></span></a>-->
 
                                             <a class="list-group-item" href="<?php echo base_url('admin/payment/cus_payment?cus=').$cus->CusCode; ?>" class="btn btn-xs btn-default">Payment <span class="pull-right"><i class="fa fa-plus "></i></span></a>
-                                            <a class="list-group-item" href="<?php echo base_url('admin/payment/customer_statement?CusCode=').$cus->CusCode; ?>" class="btn btn-xs btn-default">Statement <span class="pull-right"><i class="glyphicon glyphicon-eye-open"></i></span></a>
-                                            <a class="list-group-item" href="#" class="btn btn-xs btn-default"  data-target="#vehiclemodal"  id="addNewVehicle" >New Vehicle <span class="pull-right"><i class="fa fa-car"></i></span></a>
+                                            <!-- <a class="list-group-item" href="<?php echo base_url('admin/payment/customer_statement?CusCode=').$cus->CusCode; ?>" class="btn btn-xs btn-default">Statement <span class="pull-right"><i class="glyphicon glyphicon-eye-open"></i></span></a> -->
+                                            <!-- <a class="list-group-item" href="#" class="btn btn-xs btn-default"  data-target="#vehiclemodal"  id="addNewVehicle" >New Vehicle <span class="pull-right"><i class="fa fa-car"></i></span></a> -->
                                         <?php } ?>
 
                                     </ul>
@@ -167,86 +167,86 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!--                                    </table>-->
 <!--                                    <hr>-->
 
-                                    <h4>Easy Payment - Product</h4>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <th>Invoice Date</th>
-                                        <th>Invoice No</th>
-                                        <th>Account No</th>
-                                        <th>Invoice Amount</th>
-                                        <th>Credit Amount</th>
-                                        <th></th>
-                                        <th></th>
-                                        </thead>
-                                        <tbody>
-                                        <?php foreach($easyProduct as $v){?>
-                                            <tr>
-                                                <td><?php echo $v->InvDate;?></td>
-<!--                                                <td><a href="--><?php //echo base_url('admin/Salesinvoice/view_invoice/').base64_encode($v->JobInvNo); ?><!--">--><?php //echo $v->JobInvNo;?><!--</a></td>-->
-                                                <td><?php echo ($v->InvNo);?></td>
-                                                <td><?php echo ($v->AccNo);?></td>
-                                                <td><?php echo number_format($v->FinalAmount,2);?></td>
-                                                <td><?php echo number_format($v->TotalDue,2);?></td>
-                                                <td><?php echo printStats($v->IsCompelte,'Closed','success','Pending','warning','warning');?></td>
-                                                <td><?php echo printStats($v->IsCancel,'Canceld','danger','Active','success','success');?></td>
-                                            </tr>
-                                        <?php }?>
-                                        </tbody>
-                                    </table>
+<!--                                    <h4>Easy Payment - Product</h4>-->
+<!--                                    <table class="table table-hover">-->
+<!--                                        <thead>-->
+<!--                                        <th>Invoice Date</th>-->
+<!--                                        <th>Invoice No</th>-->
+<!--                                        <th>Account No</th>-->
+<!--                                        <th>Invoice Amount</th>-->
+<!--                                        <th>Credit Amount</th>-->
+<!--                                        <th></th>-->
+<!--                                        <th></th>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                        --><?php //foreach($easyProduct as $v){?>
+<!--                                            <tr>-->
+<!--                                                <td>--><?php //echo $v->InvDate;?><!--</td>-->
+<!--<!--                                                <td><a href="--><?php ////echo base_url('admin/Salesinvoice/view_invoice/').base64_encode($v->JobInvNo); ?><!--<!--">--><?php ////echo $v->JobInvNo;?><!--<!--</a></td>-->
+<!--                                                <td>--><?php //echo ($v->InvNo);?><!--</td>-->
+<!--                                                <td>--><?php //echo ($v->AccNo);?><!--</td>-->
+<!--                                                <td>--><?php //echo number_format($v->FinalAmount,2);?><!--</td>-->
+<!--                                                <td>--><?php //echo number_format($v->TotalDue,2);?><!--</td>-->
+<!--                                                <td>--><?php //echo printStats($v->IsCompelte,'Closed','success','Pending','warning','warning');?><!--</td>-->
+<!--                                                <td>--><?php //echo printStats($v->IsCancel,'Canceld','danger','Active','success','success');?><!--</td>-->
+<!--                                            </tr>-->
+<!--                                        --><?php //}?>
+<!--                                        </tbody>-->
+<!--                                    </table>-->
 
-                                    <hr>
-                                    <h4>Easy Payment - Cash</h4>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <th>Invoice Date</th>
-                                        <th>Invoice No</th>
-                                        <th>Account No</th>
-                                        <th>Invoice Amount</th>
-                                        <th>Credit Amount</th>
-                                        <th></th>
-                                        <th></th>
-                                        </thead>
-                                        <tbody>
-                                        <?php foreach($easyCash as $v){?>
-                                            <tr>
-                                                <td><?php echo $v->InvDate;?></td>
-                                                <!--                                                <td><a href="--><?php //echo base_url('admin/Salesinvoice/view_invoice/').base64_encode($v->JobInvNo); ?><!--">--><?php //echo $v->JobInvNo;?><!--</a></td>-->
-                                                <td><?php echo ($v->InvNo);?></td>
-                                                <td><?php echo ($v->AccNo);?></td>
-                                                <td><?php echo number_format($v->FinalAmount,2);?></td>
-                                                <td><?php echo number_format($v->TotalDue,2);?></td>
-                                                <td><?php echo printStats($v->IsCompelte,'Closed','success','Pending','warning','warning');?></td>
-                                                <td><?php echo printStats($v->IsCancel,'Canceld','danger','Active','success','success');?></td>
-                                            </tr>
-                                        <?php }?>
-                                        </tbody>
-                                    </table>
+<!--                                    <hr>-->
+<!--                                    <h4>Easy Payment - Cash</h4>-->
+<!--                                    <table class="table table-hover">-->
+<!--                                        <thead>-->
+<!--                                        <th>Invoice Date</th>-->
+<!--                                        <th>Invoice No</th>-->
+<!--                                        <th>Account No</th>-->
+<!--                                        <th>Invoice Amount</th>-->
+<!--                                        <th>Credit Amount</th>-->
+<!--                                        <th></th>-->
+<!--                                        <th></th>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                        --><?php //foreach($easyCash as $v){?>
+<!--                                            <tr>-->
+<!--                                                <td>--><?php //echo $v->InvDate;?><!--</td>-->
+<!--                                                <!--                                                <td><a href="--><?php ////echo base_url('admin/Salesinvoice/view_invoice/').base64_encode($v->JobInvNo); ?><!--<!--">--><?php ////echo $v->JobInvNo;?><!--<!--</a></td>-->
+<!--                                                <td>--><?php //echo ($v->InvNo);?><!--</td>-->
+<!--                                                <td>--><?php //echo ($v->AccNo);?><!--</td>-->
+<!--                                                <td>--><?php //echo number_format($v->FinalAmount,2);?><!--</td>-->
+<!--                                                <td>--><?php //echo number_format($v->TotalDue,2);?><!--</td>-->
+<!--                                                <td>--><?php //echo printStats($v->IsCompelte,'Closed','success','Pending','warning','warning');?><!--</td>-->
+<!--                                                <td>--><?php //echo printStats($v->IsCancel,'Canceld','danger','Active','success','success');?><!--</td>-->
+<!--                                            </tr>-->
+<!--                                        --><?php //}?>
+<!--                                        </tbody>-->
+<!--                                    </table>-->
 
+<!--                                    <hr>-->
+<!--                                    <h4>Temporary Invoice Details</h4>-->
+<!--                                    <table class="table table-hover">-->
+<!--                                        <thead>-->
+<!--                                        <th>Invoice Date</th>-->
+<!--                                        <th>Tem Invoice No</th>-->
+<!--                                        <th>Vehicle</th>-->
+<!--                                        <th>Total Amount</th>-->
+<!--                                        <th>Action</th>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                        --><?php //foreach($temp_inv as $v){?>
+<!--                                            <tr>-->
+<!--                                                <td>--><?php //echo $v->JobInvoiceDate;?><!--</td>-->
+<!--                                                <td><a href="--><?php //echo base_url('admin/Salesinvoice/view_temp_invoice/').base64_encode($v->JobInvNo); ?><!--">--><?php //echo $v->JobInvNo;?><!--</a></td>-->
+<!--                                                <td>--><?php //echo ($v->JRegNo);?><!--</td>-->
+<!--                                                <td>--><?php //echo number_format($v->JobTotalAmount,2);?><!--</td>-->
+<!--                                                <td>--><?php //if ($v->IsInvoice == 0 && $v->IsCancel == 0) { ?><!-- <a href="--><?php //echo base_url('admin/Salesinvoice/job_invoice?type=tempinv&id=').base64_encode($v->JobInvNo); ?><!--" class="btn btn-xs btn-warning" >EDIT</a> --><?php //}
+//                                                    else {?><!-- <a href="" class="btn btn-xs btn-warning" disabled>EDIT</a> --><?php //} ?><!--</td>-->
+<!--                                            </tr>-->
+<!--                                        --><?php //}?>
+<!--                                        </tbody>-->
+<!--                                    </table>-->
                                     <hr>
-                                    <h4>Temporary Invoice Details</h4>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <th>Invoice Date</th>
-                                        <th>Tem Invoice No</th>
-                                        <th>Vehicle</th>
-                                        <th>Total Amount</th>
-                                        <th>Action</th>
-                                        </thead>
-                                        <tbody>
-                                        <?php foreach($temp_inv as $v){?>
-                                            <tr>
-                                                <td><?php echo $v->JobInvoiceDate;?></td>
-                                                <td><a href="<?php echo base_url('admin/Salesinvoice/view_temp_invoice/').base64_encode($v->JobInvNo); ?>"><?php echo $v->JobInvNo;?></a></td>
-                                                <td><?php echo ($v->JRegNo);?></td>
-                                                <td><?php echo number_format($v->JobTotalAmount,2);?></td>
-                                                <td><?php if ($v->IsInvoice == 0 && $v->IsCancel == 0) { ?> <a href="<?php echo base_url('admin/Salesinvoice/job_invoice?type=tempinv&id=').base64_encode($v->JobInvNo); ?>" class="btn btn-xs btn-warning" >EDIT</a> <?php }
-                                                    else {?> <a href="" class="btn btn-xs btn-warning" disabled>EDIT</a> <?php } ?></td>
-                                            </tr>
-                                        <?php }?>
-                                        </tbody>
-                                    </table>
-                                    <hr>
-                                    <h4>Sales Details</h4>
+                                    <h3>Sales Details</h3>
                                     <table class="table table-hover">
                                         <thead>
                                         <th>Invoice Date</th>
@@ -289,100 +289,100 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-                                    <hr>
-                                    <h4>Job Details</h4>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <th>Invoice Date</th>
-                                        <th>Invoice No</th>
-<!--                                        <th>Vehicle</th>-->
-                                        <th>Invoice Amount</th>
-                                        <th>Credit Amount</th>
-                                        <th></th>
-                                        <th></th>
-                                        </thead>
-                                        <tbody>
-                                        <?php foreach($job as $v){?>
-                                            <tr>
-                                                <td><?php echo $v->JobInvoiceDate;?></td>
-                                                <td><a href="<?php echo base_url('admin/Salesinvoice/view_invoice/').base64_encode($v->JobInvNo); ?>"><?php echo $v->JobInvNo;?></a></td>
-<!--                                                <td>--><?php //echo ($v->JRegNo);?><!--</td>-->
-                                                <td><?php echo number_format($v->JobNetAmount,2);?></td>
-                                                <td><?php echo number_format($v->JobCreditAmount,2);?></td>
-                                                <td><?php echo printStats($v->IsCompelte,'Closed','success','Pending','warning','warning');?></td>
-                                                <td><?php echo printStats($v->IsCancel,'Canceld','danger','Active','success','success');?></td>
-                                            </tr>
-                                        <?php }?>
-                                        </tbody>
-                                    </table>
+<!--                                    <hr>-->
+<!--                                    <h4>Job Details</h4>-->
+<!--                                    <table class="table table-hover">-->
+<!--                                        <thead>-->
+<!--                                        <th>Invoice Date</th>-->
+<!--                                        <th>Invoice No</th>-->
+<!--<!--                                        <th>Vehicle</th>-->
+<!--                                        <th>Invoice Amount</th>-->
+<!--                                        <th>Credit Amount</th>-->
+<!--                                        <th></th>-->
+<!--                                        <th></th>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                        --><?php //foreach($job as $v){?>
+<!--                                            <tr>-->
+<!--                                                <td>--><?php //echo $v->JobInvoiceDate;?><!--</td>-->
+<!--                                                <td><a href="--><?php //echo base_url('admin/Salesinvoice/view_invoice/').base64_encode($v->JobInvNo); ?><!--">--><?php //echo $v->JobInvNo;?><!--</a></td>-->
+<!--<!--                                                <td>--><?php ////echo ($v->JRegNo);?><!--<!--</td>-->
+<!--                                                <td>--><?php //echo number_format($v->JobNetAmount,2);?><!--</td>-->
+<!--                                                <td>--><?php //echo number_format($v->JobCreditAmount,2);?><!--</td>-->
+<!--                                                <td>--><?php //echo printStats($v->IsCompelte,'Closed','success','Pending','warning','warning');?><!--</td>-->
+<!--                                                <td>--><?php //echo printStats($v->IsCancel,'Canceld','danger','Active','success','success');?><!--</td>-->
+<!--                                            </tr>-->
+<!--                                        --><?php //}?>
+<!--                                        </tbody>-->
+<!--                                    </table>-->
 
-                                    <hr>
-                                    <h4>Job Card Details</h4>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <th>Appointment Date</th>
-                                        <th>JobCardNo No</th>
-<!--                                        <th>Vehicle</th>-->
-                                        <th>OdoIn</th>
-                                        <th>End Date</th>
-                                        <th></th>
-                                        <th></th>
-                                        <th>Action</th>
-                                        </thead>
-                                        <tbody>
-                                        <?php foreach($job_card as $v){?>
-                                            <tr>
-                                                <td><?php echo $v->appoimnetDate;?></td>
-                                                <td><a href="<?php echo base_url('admin/job/view_job_card/').base64_encode($v->JobCardNo); ?>"><?php echo $v->JobCardNo;?></a></td>
-<!--                                                <td>--><?php //echo ($v->JRegNo);?><!--</td>-->
-                                                <td><?php echo ($v->OdoIn);?></td>
-                                                <td><?php echo ($v->endDate);?></td>
-                                                <td><?php echo printStats($v->IsCompelte,'Closed','success','Pending','warning','warning');?></td>
-                                                <td><?php echo printStats($v->IsCancel,'Canceld','danger','Active','success','success');?></td>
-                                                <td><?php if ($v->IsCompelte == 0 && $v->IsCancel == 0) { ?> <a href="<?php echo base_url('admin/job/edit_job/').base64_encode($v->JobCardNo); ?>" class="btn btn-xs btn-warning" >EDIT</a> <?php }
-                                                    else {?> <a href="" class="btn btn-xs btn-warning" disabled>EDIT</a> <?php } ?></td>
-                                            </tr>
-                                        <?php }?>
-                                        </tbody>
-                                    </table>
+<!--                                    <hr>-->
+<!--                                    <h4>Job Card Details</h4>-->
+<!--                                    <table class="table table-hover">-->
+<!--                                        <thead>-->
+<!--                                        <th>Appointment Date</th>-->
+<!--                                        <th>JobCardNo No</th>-->
+<!--<!--                                        <th>Vehicle</th>-->
+<!--                                        <th>OdoIn</th>-->
+<!--                                        <th>End Date</th>-->
+<!--                                        <th></th>-->
+<!--                                        <th></th>-->
+<!--                                        <th>Action</th>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                        --><?php //foreach($job_card as $v){?>
+<!--                                            <tr>-->
+<!--                                                <td>--><?php //echo $v->appoimnetDate;?><!--</td>-->
+<!--                                                <td><a href="--><?php //echo base_url('admin/job/view_job_card/').base64_encode($v->JobCardNo); ?><!--">--><?php //echo $v->JobCardNo;?><!--</a></td>-->
+<!--<!--                                                <td>--><?php ////echo ($v->JRegNo);?><!--<!--</td>-->
+<!--                                                <td>--><?php //echo ($v->OdoIn);?><!--</td>-->
+<!--                                                <td>--><?php //echo ($v->endDate);?><!--</td>-->
+<!--                                                <td>--><?php //echo printStats($v->IsCompelte,'Closed','success','Pending','warning','warning');?><!--</td>-->
+<!--                                                <td>--><?php //echo printStats($v->IsCancel,'Canceld','danger','Active','success','success');?><!--</td>-->
+<!--                                                <td>--><?php //if ($v->IsCompelte == 0 && $v->IsCancel == 0) { ?><!-- <a href="--><?php //echo base_url('admin/job/edit_job/').base64_encode($v->JobCardNo); ?><!--" class="btn btn-xs btn-warning" >EDIT</a> --><?php //}
+//                                                    else {?><!-- <a href="" class="btn btn-xs btn-warning" disabled>EDIT</a> --><?php //} ?><!--</td>-->
+<!--                                            </tr>-->
+<!--                                        --><?php //}?>
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!--                                    <hr>-->
+<!---->
+<!--                                    <h4>Advanced Payment Details</h4>-->
+<!--                                    <table class="table table-hover">-->
+<!--                                        <thead>-->
+<!--                                        <th>Payment Date</th>-->
+<!--                                        <th>Payment Type</th>-->
+<!--                                        <th>Payment No</th>-->
+<!--                                        <th>Amount</th>-->
+<!--                                        <th>Reference</th>-->
+<!--                                        <th></th>-->
+<!--                                        <th></th>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                        --><?php //foreach($payadd as $v){?>
+<!--                                            <tr>-->
+<!--                                                <td>--><?php //echo $v->PayDate;?><!--</td>-->
+<!--                                                <td>--><?php //if ($v->PaymentType==1) {
+//                                                        echo 'Credit';
+//                                                    }elseif($v->PaymentType==2){
+//                                                        echo 'Advance';
+//                                                    }?><!--</td>-->
+<!--                                                --><?php ////if(substr($v->CusPayNo,0,3)=='COB'){?>
+<!--                                                <!-- <td>--><?php //echo $v->CusPayNo;?><!--</td> -->
+<!--                                                --><?php //// }elseif ($v->CusPayNo==1) { ?>
+<!--                                                <td><a href="--><?php //echo base_url('admin/payment/view_customer_receipt?payNo=').base64_encode($v->CusPayNo); ?><!--">--><?php //echo $v->CusPayNo;?><!--</a></td>-->
+<!--                                                --><?php ////} ?>
+<!--                                                <td>--><?php //echo number_format($v->PayAmount,2);?><!--</td>-->
+<!--                                                <td>--><?php //echo ($v->Remark);?><!--</td>-->
+<!--                                                <td>--><?php //echo printStats($v->IsCancel,'Canceld','danger','Active','success','success');?><!--</td>-->
+<!--                                            </tr>-->
+<!--                                        --><?php //}?>
+<!--                                        </tbody>-->
+<!--                                    </table>-->
                                     <hr>
 
-                                    <h4>Advanced Payment Details</h4>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <th>Payment Date</th>
-                                        <th>Payment Type</th>
-                                        <th>Payment No</th>
-                                        <th>Amount</th>
-                                        <th>Reference</th>
-                                        <th></th>
-                                        <th></th>
-                                        </thead>
-                                        <tbody>
-                                        <?php foreach($payadd as $v){?>
-                                            <tr>
-                                                <td><?php echo $v->PayDate;?></td>
-                                                <td><?php if ($v->PaymentType==1) {
-                                                        echo 'Credit';
-                                                    }elseif($v->PaymentType==2){
-                                                        echo 'Advance';
-                                                    }?></td>
-                                                <?php //if(substr($v->CusPayNo,0,3)=='COB'){?>
-                                                <!-- <td><?php echo $v->CusPayNo;?></td> -->
-                                                <?php // }elseif ($v->CusPayNo==1) { ?>
-                                                <td><a href="<?php echo base_url('admin/payment/view_customer_receipt?payNo=').base64_encode($v->CusPayNo); ?>"><?php echo $v->CusPayNo;?></a></td>
-                                                <?php //} ?>
-                                                <td><?php echo number_format($v->PayAmount,2);?></td>
-                                                <td><?php echo ($v->Remark);?></td>
-                                                <td><?php echo printStats($v->IsCancel,'Canceld','danger','Active','success','success');?></td>
-                                            </tr>
-                                        <?php }?>
-                                        </tbody>
-                                    </table>
-                                    <hr>
 
-
-                                    <h4>Payment Details</h4>
+                                    <h3>Payment Details</h3>
                                     <table class="table table-hover">
                                         <thead>
                                         <th>Payment Date</th>
@@ -508,91 +508,91 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </tbody>
                                     </table>
 
-                                    <hr>
-                                    <h3>Commission</h3>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <th>Date</th>
-                                        <th>Invoice</th>
-                                        <th>Amount</th>
-                                        <th>Commission Amount</th>
-                                        </thead>
-                                        <tbody>
-                                        <?php $total_com =0;
-                                        foreach($job_com as $v){?>
-                                            <tr>
-                                                <td><?php echo $v->JobInvoiceDate;?></td>
-                                                <td><?php echo $v->JobInvNo;?></td>
-                                                <td><?php echo number_format($v->JobNetAmount,2);?></td>
-                                                <td><?php echo number_format($v->JobCommsion,2);?></td>
-                                            </tr>
-                                            <?php $total_com +=$v->JobCommsion; }?>
-                                        <?php foreach($sale_com as $v){?>
-                                            <tr>
-                                                <td><?php echo $v->SalesDate;?></td>
-                                                <td><?php echo $v->SalesInvNo;?></td>
-                                                <td><?php echo number_format($v->SalesNetAmount,2);?></td>
-                                                <td><?php echo number_format($v->SalesCommsion,2);?></td>
-                                            </tr>
-                                            <?php $total_com +=$v->SalesCommsion; }?>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td>Total</td>
-                                            <td><?php echo number_format($total_com,2);?></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+<!--                                    <hr>-->
+<!--                                    <h3>Commission</h3>-->
+<!--                                    <table class="table table-hover">-->
+<!--                                        <thead>-->
+<!--                                        <th>Date</th>-->
+<!--                                        <th>Invoice</th>-->
+<!--                                        <th>Amount</th>-->
+<!--                                        <th>Commission Amount</th>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                        --><?php //$total_com =0;
+//                                        foreach($job_com as $v){?>
+<!--                                            <tr>-->
+<!--                                                <td>--><?php //echo $v->JobInvoiceDate;?><!--</td>-->
+<!--                                                <td>--><?php //echo $v->JobInvNo;?><!--</td>-->
+<!--                                                <td>--><?php //echo number_format($v->JobNetAmount,2);?><!--</td>-->
+<!--                                                <td>--><?php //echo number_format($v->JobCommsion,2);?><!--</td>-->
+<!--                                            </tr>-->
+<!--                                            --><?php //$total_com +=$v->JobCommsion; }?>
+<!--                                        --><?php //foreach($sale_com as $v){?>
+<!--                                            <tr>-->
+<!--                                                <td>--><?php //echo $v->SalesDate;?><!--</td>-->
+<!--                                                <td>--><?php //echo $v->SalesInvNo;?><!--</td>-->
+<!--                                                <td>--><?php //echo number_format($v->SalesNetAmount,2);?><!--</td>-->
+<!--                                                <td>--><?php //echo number_format($v->SalesCommsion,2);?><!--</td>-->
+<!--                                            </tr>-->
+<!--                                            --><?php //$total_com +=$v->SalesCommsion; }?>
+<!--                                        <tr>-->
+<!--                                            <td></td>-->
+<!--                                            <td></td>-->
+<!--                                            <td>Total</td>-->
+<!--                                            <td>--><?php //echo number_format($total_com,2);?><!--</td>-->
+<!--                                        </tr>-->
+<!--                                        </tbody>-->
+<!--                                    </table>-->
 
 
-                                    <hr>
-                                    <h3>Estimate Details</h3>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <th>Date</th>
-                                        <th>Job Type</th>
-                                        <th>Estimate Type</th>
-                                        <th>Estimate No</th>
-                                        <th>Vehicle No</th>
-                                        <th>Job No</th>
-                                        <th>Amount</th>
-                                        </thead>
-                                        <tbody>
-                                        <?php $total_com =0;
-                                        //display all estimates-shalika
-                                        foreach($job_estall as $v){
-                                            //var_dump($v);
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $v->EstDate;?></td>
-                                                <td><?php if ($v->EstInsCompany==0) {
-                                                        echo 'Gereral';
-                                                    } else {echo 'Insurance' ?>
-
-                                                        <?php
-                                                        foreach ($job_est as $value) {
-                                                            if ($v->EstimateNo==$value->EstimateNo) {
-                                                                echo ' : '.$value->VComName;
-                                                            }
-
-                                                        }
-
-                                                    }//display all estimates-shalika
-                                                    ?>
-                                                </td>
-                                                <td><?php if ($v->EstType==1) {
-                                                        echo 'General ';
-                                                    }elseif($v->EstType==2){
-                                                        echo 'Supplimentery';
-                                                    }?></td>
-                                                <td><a href="<?php echo base_url('admin/job/view_estimate?type=est&id=').base64_encode($v->EstimateNo);?>&sup=<?php echo ($v->Supplimentry); ?>"><?php echo $v->EstimateNo;?></a></td>
-                                                <td><?php echo $v->EstRegNo;?></td>
-                                                <td><?php echo $v->EstJobCardNo;?></td>
-                                                <td><?php echo number_format($v->EstimateAmount,2);?></td>
-                                            </tr>
-                                        <?php }?>
-                                        </tbody>
-                                    </table>
+<!--                                    <hr>-->
+<!--                                    <h3>Estimate Details</h3>-->
+<!--                                    <table class="table table-hover">-->
+<!--                                        <thead>-->
+<!--                                        <th>Date</th>-->
+<!--                                        <th>Job Type</th>-->
+<!--                                        <th>Estimate Type</th>-->
+<!--                                        <th>Estimate No</th>-->
+<!--                                        <th>Vehicle No</th>-->
+<!--                                        <th>Job No</th>-->
+<!--                                        <th>Amount</th>-->
+<!--                                        </thead>-->
+<!--                                        <tbody>-->
+<!--                                        --><?php //$total_com =0;
+//                                        //display all estimates-shalika
+//                                        foreach($job_estall as $v){
+//                                            //var_dump($v);
+//                                            ?>
+<!--                                            <tr>-->
+<!--                                                <td>--><?php //echo $v->EstDate;?><!--</td>-->
+<!--                                                <td>--><?php //if ($v->EstInsCompany==0) {
+//                                                        echo 'Gereral';
+//                                                    } else {echo 'Insurance' ?>
+<!---->
+<!--                                                        --><?php
+//                                                        foreach ($job_est as $value) {
+//                                                            if ($v->EstimateNo==$value->EstimateNo) {
+//                                                                echo ' : '.$value->VComName;
+//                                                            }
+//
+//                                                        }
+//
+//                                                    }//display all estimates-shalika
+//                                                    ?>
+<!--                                                </td>-->
+<!--                                                <td>--><?php //if ($v->EstType==1) {
+//                                                        echo 'General ';
+//                                                    }elseif($v->EstType==2){
+//                                                        echo 'Supplimentery';
+//                                                    }?><!--</td>-->
+<!--                                                <td><a href="--><?php //echo base_url('admin/job/view_estimate?type=est&id=').base64_encode($v->EstimateNo);?><!--&sup=--><?php //echo ($v->Supplimentry); ?><!--">--><?php //echo $v->EstimateNo;?><!--</a></td>-->
+<!--                                                <td>--><?php //echo $v->EstRegNo;?><!--</td>-->
+<!--                                                <td>--><?php //echo $v->EstJobCardNo;?><!--</td>-->
+<!--                                                <td>--><?php //echo number_format($v->EstimateAmount,2);?><!--</td>-->
+<!--                                            </tr>-->
+<!--                                        --><?php //}?>
+<!--                                        </tbody>-->
+<!--                                    </table>-->
                                     <?php
                                     function printStats($status,$success,$scolor,$err,$ecolor,$default){
                                         if($status==1){

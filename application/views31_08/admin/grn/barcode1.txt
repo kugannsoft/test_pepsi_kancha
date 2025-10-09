@@ -1,0 +1,12 @@
+Company,ProductCode,ProductName,Price
+
+Sathutu Lanka (Pvt) Ltd,100072,PINEAPPLE,120
+Sathutu Lanka (Pvt) Ltd,100072,PINEAPPLE,120
+Sathutu Lanka (Pvt) Ltd,100072,PINEAPPLE,120
+Sathutu Lanka (Pvt) Ltd,100072,PINEAPPLE,120
+Sathutu Lanka (Pvt) Ltd,100072,PINEAPPLE,120
+Sathutu Lanka (Pvt) Ltd,100072,PINEAPPLE,120
+Sathutu Lanka (Pvt) Ltd,100072,PINEAPPLE,120
+Sathutu Lanka (Pvt) Ltd,100072,PINEAPPLE,120
+Sathutu Lanka (Pvt) Ltd,100072,PINEAPPLE,120
+Sathutu Lanka (Pvt) Ltd,100072,PINEAPPLE,120

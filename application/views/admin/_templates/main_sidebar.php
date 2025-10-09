@@ -158,11 +158,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php if (in_array("M5", $blockView) || $blockView == null) { ?>
                 <li class="treeview <?= active_link_controller('estimate') ?>">
 
-                    <a href="<?php echo site_url('admin/job/allCostSheet'); ?>">
+                    <!-- <a href="<?php echo site_url('admin/job/allCostSheet'); ?>">
                         <i class="fa fa-tags">
                         </i> <span>Issue Note</span>
                         <i class="fa fa-angle-left pull-right"></i>
-                    </a>
+                    </a> -->
 
                     <ul class="treeview-menu">
                         <?php if (in_array("SM51", $blockAdd) || $blockAdd == null) { ?>
@@ -262,6 +262,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php }
                         }
                         if (in_array("SM42", $blockView) || $blockView == null) {
+                            if (!in_array('all_pre_orders', $block_function)) { ?>
+                                <li class="<?= active_link_function('all_pre_orders') ?>">
+                                    <a href="<?php echo site_url('admin/Salesinvoice/all_pre_orders'); ?>">All Pre Orders</a>
+                                </li>
+                            <?php }
+                        }
+//                        if (in_array("SM42", $blockView) || $blockView == null) {
+//                            if (!in_array('all_pre_orders', $block_function)) { ?>
+<!--                                <li class="--><?php //= active_link_function('all_free_Qty') ?><!--">-->
+<!--                                    <a href="--><?php //echo site_url('admin/Salesinvoice/all_free_Qty'); ?><!--">All Free Qtys</a>-->
+<!--                                </li>-->
+<!--                            --><?php //}
+//                        }
+                        if (in_array("SM42", $blockView) || $blockView == null) {
                             if (!in_array('all_sales_invoice', $block_function)) { ?>
                                 <li class="<?= active_link_function('all_sales_invoice') ?>">
                                     <a href="<?php echo site_url('admin/Salesinvoice/all_sales_invoice'); ?>">All Sales
@@ -270,9 +284,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php }
                         }
                         if (in_array("SM43", $blockAdd) || $blockAdd == null) { ?>
-                            <li class="<?= active_link_function('job_invoice') ?>">
+                            <!-- <li class="<?= active_link_function('job_invoice') ?>">
                                 <a href="<?php echo site_url('admin/Salesinvoice/job_invoice'); ?>">Add Job Invoice</a>
-                            </li>
+                            </li> -->
                         <?php }
                         if (in_array("SM44", $blockView) || $blockView == null) {
                             ?>
@@ -283,9 +297,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!--                            </li>-->
                         <?php }
                         if (in_array("SM45", $blockView) || $blockView == null) { ?>
-                            <li class="<?= active_link_function('index') ?>">
+                            <!-- <li class="<?= active_link_function('index') ?>">
                                 <a href="<?php echo site_url('admin/AllSalesinvoice'); ?>">All Job Invoice</a>
-                            </li>
+                            </li> -->
                         <?php } ?>
                     </ul>
                 </li>
@@ -376,35 +390,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </ul>
                 <ul class="treeview-menu">
                     <li class="<?= active_link_controller('master') ?>">
-                        <a href="#"><i class="fa fa-gratipay"></i><span>Job</span>
+                        <!-- <a href="#"><i class="fa fa-gratipay"></i><span>Job</span>
                             <i class="fa fa-angle-left pull-right"></i>
-                        </a>
+                        </a> -->
                         <ul class="treeview-menu">
-                            <?php if (!in_array('job_section', $block_function)) { ?>
-                                <li class="<?= active_link_function('job_section') ?>"><a
-                                            href="<?php echo site_url('admin/master/job_section'); ?>">Job Type</a></li>
-                            <?php } ?>
-                            <li class="<?= active_link_function('job_type_header') ?>"><a
-                                        href="<?php echo site_url('admin/master/job_type_header'); ?>">Work Type
-                                    Category</a></li>
+<!--                            --><?php //if (!in_array('job_section', $block_function)) { ?>
+<!--                                <li class="--><?php //= active_link_function('job_section') ?><!--"><a-->
+<!--                                            href="--><?php //echo site_url('admin/master/job_section'); ?><!--">Job Type</a></li>-->
+<!--                            --><?php //} ?>
+<!--                            <li class="--><?php //= active_link_function('job_type_header') ?><!--"><a-->
+<!--                                        href="--><?php //echo site_url('admin/master/job_type_header'); ?><!--">Work Type-->
+<!--                                    Category</a></li>-->
 
-                            <?php if (!in_array('job_type', $block_function)) { ?>
-                                <li class="<?= active_link_function('job_type') ?>"><a
-                                            href="<?php echo site_url('admin/master/job_type'); ?>">Work Type</a></li>
-                            <?php } ?>
-                            <?php if (!in_array('jobinv_description', $block_function)) { ?>
-                                <li class="<?= active_link_function('jobinv_description') ?>"><a
-                                            href="<?php echo site_url('admin/master/jobinv_description'); ?>">Work Type
-                                        Description</a></li>
-                            <?php } ?>
-                            <?php if (!in_array('jobcard_description', $block_function)) { ?>
-                                <li class="<?= active_link_function('jobcard_description') ?>"><a
-                                            href="<?php echo site_url('admin/master/jobcard_description'); ?>">Customer
-                                        Request Notes</a></li>
-                            <?php }
-                            if (!in_array('jobcard_category', $block_function)) { ?>
-                                <!-- <li class="<?= active_link_function('jobcard_category') ?>"><a href="<?php echo site_url('admin/master/jobcard_category'); ?>">Job Category</a></li> -->
-                            <?php } ?>
+<!--                            --><?php //if (!in_array('job_type', $block_function)) { ?>
+<!--                                <li class="--><?php //= active_link_function('job_type') ?><!--"><a-->
+<!--                                            href="--><?php //echo site_url('admin/master/job_type'); ?><!--">Work Type</a></li>-->
+<!--                            --><?php //} ?>
+<!--                            --><?php //if (!in_array('jobinv_description', $block_function)) { ?>
+<!--                                <li class="--><?php //= active_link_function('jobinv_description') ?><!--"><a-->
+<!--                                            href="--><?php //echo site_url('admin/master/jobinv_description'); ?><!--">Work Type-->
+<!--                                        Description</a></li>-->
+<!--                            --><?php //} ?>
+<!--                            --><?php //if (!in_array('jobcard_description', $block_function)) { ?>
+<!--                                <li class="--><?php //= active_link_function('jobcard_description') ?><!--"><a-->
+<!--                                            href="--><?php //echo site_url('admin/master/jobcard_description'); ?><!--">Customer-->
+<!--                                        Request Notes</a></li>-->
+<!--                            --><?php //}
+//                            if (!in_array('jobcard_category', $block_function)) { ?>
+<!--                                 <li class="--><?php //= active_link_function('jobcard_category') ?><!--"><a href="--><?php //echo site_url('admin/master/jobcard_category'); ?><!--">Job Category</a></li> -->
+<!--                            --><?php //} ?>
 
                         </ul>
                     </li>
@@ -415,21 +429,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="<?= active_link_function('mercedes_model_codes') ?>"><a
-                                        href="<?php echo site_url('admin/master/mercedes_model_codes'); ?>">Models
-                                    Codes</a></li>
+<!--                            <li class="--><?php //= active_link_function('mercedes_model_codes') ?><!--"><a-->
+<!--                                        href="--><?php //echo site_url('admin/master/mercedes_model_codes'); ?><!--">Models-->
+<!--                                    Codes</a></li>-->
 
                             <?php if (!in_array('vcategory', $block_function)) { ?>
                                 <!-- <li class="<?= active_link_function('vcategory') ?>"><a href="<?php echo site_url('admin/master/vcategory'); ?>">Vehicle Make & Models</a></li> -->
                             <?php } ?>
                             <?php if (!in_array('view_inscompany', $block_function)) { ?>
-                                <li class="<?= active_link_function('view_inscompany') ?>"><a
-                                            href="<?php echo site_url('admin/master/view_inscompany'); ?>">Third Party
-                                        Companies</a></li>
+<!--                                <li class="--><?php //= active_link_function('view_inscompany') ?><!--"><a-->
+<!--                                            href="--><?php //echo site_url('admin/master/view_inscompany'); ?><!--">Third Party-->
+<!--                                        Companies</a></li>-->
                             <?php } ?>
-                            <li class="<?= active_link_function('invoice_condition') ?>"><a
-                                        href="<?php echo site_url('admin/master/invoice_condition'); ?>">Terms &
-                                    Conditions</a></li>
+<!--                            <li class="--><?php //= active_link_function('invoice_condition') ?><!--"><a-->
+<!--                                        href="--><?php //echo site_url('admin/master/invoice_condition'); ?><!--">Terms &-->
+<!--                                    Conditions</a></li>-->
 
 
                             <?php if (!in_array('trans_type', $block_function)) { ?>
@@ -582,49 +596,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </ul>
                 <ul class="treeview-menu">
                     <li class="<?= active_link_controller('report') ?>">
-                        <a href="#"><i class="fa fa-gratipay"></i><span>Issue Note</span>
+                        <!-- <a href="#"><i class="fa fa-gratipay"></i><span>Issue Note</span>
                             <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li class="<?= active_link_function('issueNoteByDate') ?>">
-                                <a href="<?php echo site_url('admin/report/issueNoteByDate'); ?>">Issue Note By Date</a>
-                            </li>
-                            <li class="<?= active_link_function('issueNoteByDate') ?>">
-                                <a href="<?php echo site_url('admin/report/issueNoteByJob'); ?>">Issue Note By Job</a>
-                            </li>
-                        </ul>
+                        </a> -->
+<!--                        <ul class="treeview-menu">-->
+<!--                            <li class="--><?php //= active_link_function('issueNoteByDate') ?><!--">-->
+<!--                                <a href="--><?php //echo site_url('admin/report/issueNoteByDate'); ?><!--">Issue Note By Date</a>-->
+<!--                            </li>-->
+<!--                            <li class="--><?php //= active_link_function('issueNoteByDate') ?><!--">-->
+<!--                                <a href="--><?php //echo site_url('admin/report/issueNoteByJob'); ?><!--">Issue Note By Job</a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
                     </li>
                 </ul>
                 <ul class="treeview-menu">
                     <li class="<?= active_link_controller('report') ?>">
-                        <a href="#"><i class="fa fa-gratipay"></i><span>Job Sale</span>
+                        <!-- <a href="#"><i class="fa fa-gratipay"></i><span>Job Sale</span>
                             <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li class="<?= active_link_function('jobsalesbydate') ?>">
-                                <a href="<?php echo site_url('admin/report/jobsalesbydate'); ?>">Date wise Job sale</a>
-                            </li>
-                            <li class="<?= active_link_function('jobsalesumbydate') ?>">
-                                <a href="<?php echo site_url('admin/report/jobsalesumbydate'); ?>">Job Invoice
-                                    summery</a>
-                            </li>
-                            <li class="<?= active_link_function('jobpaymentbyinvoice') ?>">
-                                <a href="<?php echo site_url('admin/report/jobpaymentbyinvoice'); ?>">Job Payment
-                                    summery</a>
-                            </li>
-                            <li class="<?= active_link_function('jobsalesbyservice') ?>">
-                                <a href="<?php echo site_url('admin/report/jobsalesbyservice'); ?>">Service wise Job
-                                    sale</a>
-                            </li>
-                            <li class="<?= active_link_function('jobsalesbyproduct') ?>">
-                                <a href="<?php echo site_url('admin/report/jobsalesbyproduct'); ?>">Product wise Job
-                                    sale</a>
-                            </li>
+                        </a> -->
+<!--                        <ul class="treeview-menu">-->
+<!--                            <li class="--><?php //= active_link_function('jobsalesbydate') ?><!--">-->
+<!--                                <a href="--><?php //echo site_url('admin/report/jobsalesbydate'); ?><!--">Date wise Job sale</a>-->
+<!--                            </li>-->
+<!--                            <li class="--><?php //= active_link_function('jobsalesumbydate') ?><!--">-->
+<!--                                <a href="--><?php //echo site_url('admin/report/jobsalesumbydate'); ?><!--">Job Invoice-->
+<!--                                    summery</a>-->
+<!--                            </li>-->
+<!--                            <li class="--><?php //= active_link_function('jobpaymentbyinvoice') ?><!--">-->
+<!--                                <a href="--><?php //echo site_url('admin/report/jobpaymentbyinvoice'); ?><!--">Job Payment-->
+<!--                                    summery</a>-->
+<!--                            </li>-->
+<!--                            <li class="--><?php //= active_link_function('jobsalesbyservice') ?><!--">-->
+<!--                                <a href="--><?php //echo site_url('admin/report/jobsalesbyservice'); ?><!--">Service wise Job-->
+<!--                                    sale</a>-->
+<!--                            </li>-->
+<!--                            <li class="--><?php //= active_link_function('jobsalesbyproduct') ?><!--">-->
+<!--                                <a href="--><?php //echo site_url('admin/report/jobsalesbyproduct'); ?><!--">Product wise Job-->
+<!--                                    sale</a>-->
+<!--                            </li>-->
                         <!--    <li class="<?= active_link_function('vehiclesummery') ?>">-->
                         <!--        <a href="<?php echo site_url('admin/report/vehiclesummery'); ?>">Vehicle wise Job-->
                         <!--            summary</a>-->
                         <!--    </li>-->
-                        </ul>
+<!--                        </ul>-->
                     </li>
                 </ul>
                 <ul class="treeview-menu">
@@ -636,22 +650,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <li class="<?= active_link_function('salesbydate') ?>">
                                 <a href="<?php echo site_url('admin/report/salesbydate'); ?>">Date wise sale</a>
                             </li>
-                                 <li class="<?= active_link_function('directsalesbyproduct') ?>">
-                                                                <a href="<?php echo site_url('admin/report/directsalesbyproduct'); ?>">Product wise sale</a>
-                                                            </li>
+                            <li class="<?= active_link_function('directsalesbyproduct') ?>">
+                                <a href="<?php echo site_url('admin/report/directsalesbyproduct'); ?>">Product wise sale</a>
+                            </li>
+
+                           
+                                <li class="<?= active_link_function('loadingreport') ?>">
+                                    <a href="<?php echo site_url('admin/report/loadingreport'); ?>">Loading Report</a>
+                                </li>
+                         
                         </ul>
                     </li>
                 </ul>
                 <ul class="treeview-menu">
                         <li class="<?= active_link_controller('report') ?>">
-                            <a href="#"><i class="fa fa-gratipay"></i><span>Customer Order</span>
+                            <!-- <a href="#"><i class="fa fa-gratipay"></i><span>Customer Order</span>
                                 <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li class="<?= active_link_function('salesbydate') ?>">
-                                    <a href="<?php echo site_url('admin/report/orderbydate'); ?>">Date wise order</a>
-                                </li>
-                            </ul>
+                            </a> -->
+<!--                            <ul class="treeview-menu">-->
+<!--                                <li class="--><?php //= active_link_function('salesbydate') ?><!--">-->
+<!--                                    <a href="--><?php //echo site_url('admin/report/orderbydate'); ?><!--">Date wise order</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
                         </li>
                     </ul>
                 <ul class="treeview-menu">
@@ -678,12 +698,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <li class="<?= active_link_function('lowstockreport') ?>">
                                 <a href="<?php echo site_url('admin/report/lowstockreport'); ?>">Minimum Stock</a>
                             </li>
-<!--                            <li class="--><?//= active_link_function('pricereport') ?><!--">-->
-<!--                                <a href="--><?php //echo site_url('admin/report/pricereport'); ?><!--">Price Stock</a>-->
-<!--                            </li>-->
-                            <li class="<?= active_link_function('serialstock') ?>">
-                                <a href="<?php echo site_url('admin/report/serialstock'); ?>">Product Serial Stock</a>
+                            <li class="<?= active_link_function('pricereport') ?>">
+                                <a href="<?php echo site_url('admin/report/pricereport'); ?>">Price Stock</a>
                             </li>
+<!--                            <li class="--><?php //= active_link_function('serialstock') ?><!--">-->
+<!--                                <a href="--><?php //echo site_url('admin/report/serialstock'); ?><!--">Product Serial Stock</a>-->
+<!--                            </li>-->
 <!--                            <li class="--><?//= active_link_function('dailyfinalreport') ?><!--">-->
 <!--                                <a href="--><?php //echo site_url('admin/report/dailyfinalreport'); ?><!--">Daily Final Stock</a>-->
 <!--                            </li>-->
@@ -712,20 +732,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <a href="<?php echo site_url('admin/report/cashinout'); ?>">Cash In out</a>
                             </li>
                             <li class="<?= active_link_function('cashfloat') ?>">
-                                <a href="<?php echo site_url('admin/report/cashfloat'); ?>">Expenses Earning</a>
+                                <a href="<?php echo site_url('admin/report/cashfloat'); ?>">Expenses / Earning</a>
                             </li>
                             <li class="<?= active_link_function('dailybalancedetail') ?>">
                                 <a href="<?php echo site_url('admin/report/dailybalancedetail'); ?>">Daily Cash
                                     Float</a>
                             </li>
-                            <li class="<?= active_link_function('dailycashturnover') ?>">
-                                    <a href="<?php echo site_url('admin/report/dailycashturnover'); ?>">Cash
-                                        Turn Over</a>
-                                </li>
-                                 <li class="<?= active_link_function('dailycashturnoversummary') ?>">
-                                    <a href="<?php echo site_url('admin/report/dailycashturnoversummary'); ?>">Cash
-                                        Turn Over Summery</a>
-                                </li>
+<!--                            <li class="--><?php //= active_link_function('dailycashturnover') ?><!--">-->
+<!--                                    <a href="--><?php //echo site_url('admin/report/dailycashturnover'); ?><!--">Cash-->
+<!--                                        Turn Over</a>-->
+<!--                                </li>-->
+<!--                                 <li class="--><?php //= active_link_function('dailycashturnoversummary') ?><!--">-->
+<!--                                    <a href="--><?php //echo site_url('admin/report/dailycashturnoversummary'); ?><!--">Cash-->
+<!--                                        Turn Over Summery</a>-->
+<!--                                </li>-->
                         </ul>
                     </li>
                 </ul>
@@ -749,7 +769,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </ul>
                 <ul class="treeview-menu">
                     <li class="<?= active_link_controller('report') ?>">
-                        <a href="#"><i class="fa fa-gratipay"></i><span>Credit</span>
+                        <a href="#"><i class="fa fa-gratipay"></i><span>Customer Outstanding</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
@@ -768,20 +788,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     </li>
                 </ul>
                 <ul class="treeview-menu">
-                    <li class="<?= active_link_controller('report') ?>">
-                        <a href="#"><i class="fa fa-gratipay"></i><span>Commission</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li class="<?= active_link_function('customercommission') ?>">
-                                <a href="<?php echo site_url('admin/report/customercommission'); ?>">Customer wise
-                                    Commission</a>
-                            </li>
+<!--                    <li class="--><?php //= active_link_controller('report') ?><!--">-->
+<!--                        <a href="#"><i class="fa fa-gratipay"></i><span>Commission</span>-->
+<!--                            <i class="fa fa-angle-left pull-right"></i>-->
+<!--                        </a>-->
+<!--                        <ul class="treeview-menu">-->
+<!--                            <li class="--><?php //= active_link_function('customercommission') ?><!--">-->
+<!--                                <a href="--><?php //echo site_url('admin/report/customercommission'); ?><!--">Customer wise-->
+<!--                                    Commission</a>-->
+<!--                            </li>-->
                             <!-- <li class="">
                                 <a href="#">Supplier Payments</a>
                             </li> -->
-                        </ul>
-                    </li>
+<!--                        </ul>-->
+<!--                    </li>-->
                 </ul>
                 <ul class="treeview-menu">
                         <li class="<?= active_link_controller('report') ?>">
@@ -793,29 +813,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <a href="<?php echo site_url('admin/report/monthwiseincomereport'); ?>">Monthly Transaction Report</a>
                                 </li>
                             </ul>
+                           
+<!--                            <ul class="treeview-menu">-->
+<!--                                <li class="--><?php //= active_link_function('routewisereport') ?><!--">-->
+<!--                                    <a href="--><?php //echo site_url('admin/report/routewisereport'); ?><!--">Route Wise Report</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                            <ul class="treeview-menu">-->
+<!--                                <li class="--><?php //= active_link_function('routewiseoutstandingreport') ?><!--">-->
+<!--                                    <a href="--><?php //echo site_url('admin/report/routewiseoutstandingreport'); ?><!--">Route Wise Outstanding Report</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                            <ul class="treeview-menu">-->
+<!--                                <li class="--><?php //= active_link_function('saleswisereport') ?><!--">-->
+<!--                                    <a href="--><?php //echo site_url('admin/report/saleswisereport'); ?><!--">Total Sales Report</a>-->
+<!--                                </li>-->
+<!--                            </ul>-->
                             <ul class="treeview-menu">
-                                <li class="<?= active_link_function('loadingreport') ?>">
-                                    <a href="<?php echo site_url('admin/report/loadingreport'); ?>">Loading Report</a>
-                                </li>
-                            </ul>
-                            <ul class="treeview-menu">
-                                <li class="<?= active_link_function('routewisereport') ?>">
-                                    <a href="<?php echo site_url('admin/report/routewisereport'); ?>">Route Wise Report</a>
-                                </li>
-                            </ul>
-                            <ul class="treeview-menu">
-                                <li class="<?= active_link_function('routewiseoutstandingreport') ?>">
-                                    <a href="<?php echo site_url('admin/report/routewiseoutstandingreport'); ?>">Route Wise Outstanding Report</a>
-                                </li>
-                            </ul>
-                            <ul class="treeview-menu">
-                                <li class="<?= active_link_function('saleswisereport') ?>">
-                                    <a href="<?php echo site_url('admin/report/saleswisereport'); ?>">Total Sales Report</a>
+                                <li class="<?= active_link_function('returnreport') ?>">
+                                    <a href="<?php echo site_url('admin/report/returnreport'); ?>">Return Report</a>
                                 </li>
                             </ul>
                             <ul class="treeview-menu">
                                 <li class="<?= active_link_function('returnreport') ?>">
-                                    <a href="<?php echo site_url('admin/report/returnreport'); ?>">Return Report</a>
+                                    <a href="<?php echo site_url('admin/report/returnreport1'); ?>">Order Return Report</a>
+                                </li>
+                            </ul>
+                            <ul class="treeview-menu">
+                                <li class="<?= active_link_function('receivedproductreport') ?>">
+                                    <a href="<?php echo site_url('admin/report/receivedproductreport'); ?>">Received Product Report</a>
                                 </li>
                             </ul>
                         </li>
@@ -908,11 +934,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             } ?>
             <?php if (in_array("M12", $blockView) || $blockView == null) { ?>
             <li class="treeview <?= active_link_controller('mrn') ?>">
-                <a href="#">
+                <!-- <a href="#">
                     <i class="fa fa-instagram"></i>
                     <span>Parts Request</span>
                     <i class="fa fa-angle-left pull-right"></i>
-                </a>
+                </a> -->
 
                 <ul class="treeview-menu">
                     <li class="<?= active_link_function('add_mrn') ?>"><a
@@ -952,6 +978,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <?php if (in_array("SM134", $blockView) || $blockView == null) { ?>
                         <li class="<?= active_link_function('index') ?>"><a
                                     href="<?php echo site_url('admin/invoice/index'); ?>">Reprint Pos Invoice</a></li>
+                    <?php } ?>
+                    <?php if (in_array("SM134", $blockView) || $blockView == null) { ?>
+                        <li class="<?= active_link_function('received_invoice') ?>"><a
+                                    href="<?php echo site_url('admin/invoice/received_invoice'); ?>">Received Product Count</a></li>
+                    <?php } ?>
+                    <?php if (in_array("SM134", $blockView) || $blockView == null) { ?>
+                        <li class="<?= active_link_function('received_invoice') ?>"><a
+                                    href="<?php echo site_url('admin/invoice/all_received_invoice'); ?>">All Received Product Count Details</a></li>
                     <?php } ?>
                 </ul>
             </li>
@@ -997,7 +1031,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <span>Update Daily Stock</span>
                 </a>
             </li>  -->
-            <?php if ($_SESSION['role'] == 1) { ?>
+       
+            <?php if (empty($_SESSION['role']) || $_SESSION['role'] == 1) { ?>
                 <li class="header text-uppercase"><?php echo lang('menu_administration'); ?></li>
                 
                  <li class="<?= active_link_controller('setPermission') ?>">

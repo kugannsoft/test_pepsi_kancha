@@ -72,12 +72,15 @@
                     <input type="text" required="required" class="form-control" name="nic" id="nic" placeholder="NIC No Or Passport No">
                 </div>
                 <div class="form-group">
-                    <label for="respectSign" >Handle By</label>
+                    <label for="respectSign" >Salesperson</label>
                     <select class="form-control" name="salesperson" id="salesperson">
                         <option value="0">-Select-</option>
-                        <?php foreach ($emp AS $t) { ?>
-                            <option value="<?php echo $t->RepID ?>"><?php echo $t->RepName ?></option>
-                        <?php } ?>
+                        <?php foreach ($emp as $t): ?>
+                            <?php if ($t->IsActive == 1): ?>
+                                <option value="<?php echo $t->RepID ?>"><?php echo $t->RepName ?></option>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+
                     </select>
                 </div></div>
             </div>
@@ -101,6 +104,11 @@
                         <label for="cusName">Routes</label>
                         <select class="form-control" name="route" id="route">
                             <option value="0">-Select-</option>
+                            <?php foreach ($routes as $route) { ?>
+                                <option value="<?php echo $route->id ?>">
+                                    <?php echo ($route->name); ?>
+                                </option>
+                            <?php } ?>
                         </select>
                     </div>
                 </div>
@@ -123,14 +131,18 @@
                         <div class="form-group">
                             <label for="mobileNo">Customer Mobile </label>
                             <div class="input-group">
-                                <input type="text"  class="form-control" name="mobileNo" id="mobileNo" placeholder="Enter customer mobile " maxlength="12" value="+94">
+                                <input type="tel" class="form-control" name="mobileNo" id="mobileNo" placeholder="Enter customer mobile" maxlength="12"
+                                value="+94" required pattern="\+94\d{9}" title="Please enter a valid mobile number starting with +94 and followed by 9 digits.">
+
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="phoneNo">Customer Phone </label>
-                            <input type="text"  class="form-control" name="phoneNo" id="phoneNo" placeholder="Enter customer phone" maxlength="12" value="+94">
+                            <input type="text" class="form-control" name="phoneNo" id="phoneNo" placeholder="Enter customer phone" maxlength="12"
+                                   value="+94"  >
+
                         </div>
                     </div>
                 </div>
@@ -139,7 +151,10 @@
                         <div class="form-group">
                             <label for="mobileNo">Work Phone</label>
                             <div class="input-group">
-                                <input type="text"  class="form-control" name="workPhone" id="workPhone" placeholder="Enter Work Phone " maxlength="12" value="+94">
+
+                                <input type="text" class="form-control" name="workPhone" id="workPhone" placeholder="Enter Work Phone" maxlength="12"
+                                       value="+94"  >
+
                             </div>
                         </div>
                     </div>
@@ -160,6 +175,7 @@
                             <label for="mobileNo">Contact Person</label>
                             <div class="input-group">
                                 <input type="text"  class="form-control" name="contactName" id="contactName" placeholder="Enter Contact Person ">
+
                             </div>
                         </div>
                     </div>
@@ -167,7 +183,9 @@
                         <div class="form-group">
                             <label for="mobileNo">Contact Phone</label>
                             <div class="input-group">
-                                <input type="text"  class="form-control" name="contactPhone" id="contactPhone" placeholder="Enter Work Phone " maxlength="12" value="+94">
+                               <input type="text" class="form-control" name="contactPhone" id="contactPhone" placeholder="Enter Work Phone" maxlength="12"
+                                       value="+94" >
+
                             </div>
                         </div>
                     </div>
@@ -191,13 +209,13 @@
                     </div>  
                 </div>
                 <div class="row" id="creditDiv">
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="display:none;">
                         <div class="form-group">
                             <label for="creditLimit">Balance Date</label>
                             <input type="text"  class="form-control" name="balanceDate" id="balanceDate" placeholder="Enter Balance Date" />
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="display:none;">
                         <div class="form-group">
                             <label for="balanaceAmount">Balance Amount</label>
                             <input type="text"  class="form-control" name="balanaceAmount" id="balanaceAmount" placeholder="Enter Balanace Amount" />
@@ -206,7 +224,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="creditLimit">Credit Limit</label>
-                            <input type="text"  class="form-control" name="creditLimit" id="creditLimit" placeholder="Enter Credit Limit" />
+                            <input type="text"  class="form-control" name="creditLimit" id="creditLimit" placeholder="Enter Credit Limit" required />
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -388,7 +406,7 @@ var proCodeDuplicate=0;
 
 $("#btnAddJob").prop("disabled",true);
 $("#btnAddEst").prop("disabled",true);
-    
+
 $("#cusName").blur(function(){
     cusNameDuplicate=0;
     var cusname=$(this).val();
@@ -569,7 +587,7 @@ $("input[name='Isvehicle']").click(function(){
             $.notify("Please enter balance Date", "warn");
         }else{
 		     $("#btnsave").prop("disabled",true);
-             
+
 		    $.ajax({
 		            url: "<?php echo base_url('admin/customer/savecustomer/') ?>",
 		            type: "POST",
@@ -968,5 +986,56 @@ $('#salesperson').on('change', function() {
             $('#route').append('<option value="0">-Select-</option>');
         }
 });
-    
+
+    const mobileNoInput = document.getElementById('mobileNo');
+
+    mobileNoInput.addEventListener('input', function () {
+
+        if (!this.value.startsWith('+94')) {
+            this.value = '+94';
+        } else {
+
+            let digitsOnly = this.value.substring(3).replace(/\D/g, '');
+            this.value = '+94' + digitsOnly.substring(0, 9);
+        }
+    });
+    const phoneNoInput = document.getElementById('phoneNo');
+
+    phoneNoInput.addEventListener('input', function () {
+
+        if (!this.value.startsWith('+94')) {
+            this.value = '+94';
+        } else {
+
+            let digitsOnly = this.value.substring(3).replace(/\D/g, '');
+            this.value = '+94' + digitsOnly.substring(0, 9);
+        }
+    });
+
+    const workPhoneInput = document.getElementById('workPhone');
+
+    workPhoneInput.addEventListener('input', function () {
+
+        if (!this.value.startsWith('+94')) {
+            this.value = '+94';
+        } else {
+
+            let digitsOnly = this.value.substring(3).replace(/\D/g, '');
+            this.value = '+94' + digitsOnly.substring(0, 9);
+        }
+    });
+
+    const contactPhoneInput = document.getElementById('contactPhone');
+
+    contactPhoneInput.addEventListener('input', function () {
+
+        if (!this.value.startsWith('+94')) {
+            this.value = '+94';
+        } else {
+
+            let digitsOnly = this.value.substring(3).replace(/\D/g, '');
+            this.value = '+94' + digitsOnly.substring(0, 9);
+        }
+    });
+
 </script>

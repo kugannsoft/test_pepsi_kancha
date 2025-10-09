@@ -1,7 +1,7 @@
 <form id="addsupplierform">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-power-off myclose"></i></button>
-        <h4>Add Supplier</h4>
+        <h4>Edit Supplier</h4>
     </div>
     <div class="modal-body">
         <div class="row">
@@ -89,9 +89,53 @@
             data: $(this).serializeArray(),
             success: function (data) {
                 if (data == 1) {
+                    $.notify("Supplier Edited Successfully..!", "success");
                     $('#suppliermodal').modal('hide');
+                }else{
+                    $.notify("Error..!", "warning");
                 }
             }
         });
     });
+
+
+    const mobileInput = document.getElementById('mobile');
+
+    mobileInput.addEventListener('input', function () {
+
+        if (!this.value.startsWith('+94')) {
+            this.value = '+94';
+        } else {
+
+            let digitsOnly = this.value.substring(3).replace(/\D/g, '');
+            this.value = '+94' + digitsOnly.substring(0, 9);
+        }
+    });
+
+    const officeInput = document.getElementById('office');
+
+    officeInput.addEventListener('input', function () {
+
+        if (!this.value.startsWith('+94')) {
+            this.value = '+94';
+        } else {
+
+            let digitsOnly = this.value.substring(3).replace(/\D/g, '');
+            this.value = '+94' + digitsOnly.substring(0, 9);
+        }
+    });
+
+    const faxInput = document.getElementById('fax');
+
+    faxInput.addEventListener('input', function () {
+
+        if (!this.value.startsWith('+94')) {
+            this.value = '+94';
+        } else {
+
+            let digitsOnly = this.value.substring(3).replace(/\D/g, '');
+            this.value = '+94' + digitsOnly.substring(0, 9);
+        }
+    });
+
 </script>
