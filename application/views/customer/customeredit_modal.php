@@ -81,7 +81,7 @@
                             <input type="text" required="required" class="form-control" value="<?php echo $cusdata->Nic; ?>" name="nic" id="nic" placeholder="NIC No Or Passport No">
                         </div>
                         <div class="form-group">
-                            <label for="respectSign" >Handle By</label>
+                            <label for="respectSign" >Salesperson</label>
                             <select class="form-control" name="salesperson" id="salesperson">
                                 <option value="0">-Select-</option>
                                 <?php foreach ($emp AS $t) { ?>
@@ -113,9 +113,10 @@
                         <select class="form-control" name="route" id="route">
                             <option value="0">-Select-</option>
                             <?php foreach ($routes as $route) { ?>
-                                <option value="<?php echo $route->route_id ?>" 
-                                    <?php echo ($route->route_id == $cusdata->RouteId) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($route->route_name); ?>
+
+                                <option value="<?php echo $route->id ?>"
+                                <?php echo ($route->id == $cusdata->RouteId) ? 'selected' : ''; ?>>
+                                    <?php echo ($route->name); ?>
                                 </option>
                             <?php } ?>
                         </select>
@@ -134,7 +135,8 @@
                         <div class="form-group">
                             <label for="mobileNo">Customer Mobile </label>
                             <div class="input-group">
-                                <input type="text"  class="form-control" value="<?php echo $cusdata->MobileNo; ?>"  name="mobileNo" id="mobileNo" placeholder="Enter customer mobile " maxlength="12" value="+94">
+                                <input type="text"  class="form-control" value="<?php echo $cusdata->MobileNo; ?>"  name="mobileNo" id="mobileNo" placeholder="Enter customer mobile " maxlength="12"
+                                value="+94"  pattern="\+94\d{9}" title="Please enter a valid mobile number starting with +94 and followed by 9 digits.">
                             </div>
                         </div>
                     </div>
@@ -142,6 +144,7 @@
                         <div class="form-group">
                             <label for="phoneNo">Customer Phone </label>
                             <input type="text"  class="form-control" value="<?php echo $cusdata->LanLineNo; ?>" name="phoneNo" id="phoneNo" placeholder="Enter customer phone" maxlength="12" value="+94">
+
                         </div>
                     </div>
                 </div>
@@ -150,7 +153,8 @@
                         <div class="form-group">
                             <label for="mobileNo">Work Phone</label>
                             <div class="input-group">
-                                <input type="text"  class="form-control" value="<?php echo $cusdata->WorkNo; ?>" name="workPhone" id="workPhone" placeholder="Enter Work Phone " maxlength="12" value="+94">
+                                <input type="text"  class="form-control" value="<?php echo $cusdata->WorkNo; ?>" name="workPhone" id="workPhone" placeholder="Enter Work Phone " maxlength="12" 
+                                value="+94"  title="Please enter a valid mobile number starting with +94 and followed by 9 digits.">
                             </div>
                         </div>
                     </div>
@@ -178,7 +182,8 @@
                         <div class="form-group">
                             <label for="mobileNo">Contact Phone</label>
                             <div class="input-group">
-                                <input type="text"  class="form-control" name="contactPhone"  value="<?php echo $cusdata->ContactNo; ?>" id="contactPhone" placeholder="Enter Work Phone " maxlength="12" value="+94">
+                                <input type="text"  class="form-control" name="contactPhone"  value="<?php echo $cusdata->ContactNo; ?>" id="contactPhone" placeholder="Enter Work Phone " maxlength="12" 
+                                value="+94" title="Please enter a valid mobile number starting with +94 and followed by 9 digits.">
                             </div>
                         </div>
                     </div>
@@ -202,13 +207,13 @@
                     </div>  
                 </div>
                 <div class="row" id="creditDiv">
-                <div class="col-md-6">
+                <div class="col-md-6" style="display:none;">
                         <div class="form-group">
                             <label for="creditLimit">Balance Date</label>
                             <input type="text"  class="form-control" name="balanceDate" value="<?php echo $cusdata->BalanceDate; ?>" id="balanceDate" placeholder="Enter Balance Date" />
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="display:none;">
                         <div class="form-group">
                             <label for="balanaceAmount">Balance Amount</label>
                             <input type="text"  class="form-control" value="<?php echo $cusdata->BalanaceAmount; ?>" name="balanaceAmount" id="balanaceAmount" placeholder="Enter Balanace Amount" />
@@ -217,7 +222,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="creditLimit">Credit Limit</label>
-                            <input type="text"  class="form-control" value="<?php echo $cusdata->CreditLimit; ?>" name="creditLimit" id="creditLimit" placeholder="Enter Credit Limit" />
+                            <input type="text"  class="form-control" value="<?php echo $cusdata->CreditLimit; ?>" name="creditLimit" id="creditLimit" placeholder="Enter Credit Limit" required  />
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -643,4 +648,58 @@ $('#salesperson').on('change', function() {
             $('#route').append('<option value="0">-Select-</option>');
         }
 });
+
+
+const mobileNoInput = document.getElementById('mobileNo');
+
+mobileNoInput.addEventListener('input', function () {
+
+    if (!this.value.startsWith('+94')) {
+        this.value = '+94';
+    } else {
+
+        let digitsOnly = this.value.substring(3).replace(/\D/g, '');
+        this.value = '+94' + digitsOnly.substring(0, 9);
+    }
+});
+const phoneNoInput = document.getElementById('phoneNo');
+
+phoneNoInput.addEventListener('input', function () {
+
+    if (!this.value.startsWith('+94')) {
+        this.value = '+94';
+    } else {
+
+        let digitsOnly = this.value.substring(3).replace(/\D/g, '');
+        this.value = '+94' + digitsOnly.substring(0, 9);
+    }
+});
+
+const workPhoneInput = document.getElementById('workPhone');
+
+workPhoneInput.addEventListener('input', function () {
+
+    if (!this.value.startsWith('+94')) {
+        this.value = '+94';
+    } else {
+
+        let digitsOnly = this.value.substring(3).replace(/\D/g, '');
+        this.value = '+94' + digitsOnly.substring(0, 9);
+    }
+});
+
+const contactPhoneInput = document.getElementById('contactPhone');
+
+contactPhoneInput.addEventListener('input', function () {
+
+    if (!this.value.startsWith('+94')) {
+        this.value = '+94';
+    } else {
+
+        let digitsOnly = this.value.substring(3).replace(/\D/g, '');
+        this.value = '+94' + digitsOnly.substring(0, 9);
+    }
+});
+
+
 </script>

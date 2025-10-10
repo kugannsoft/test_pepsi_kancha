@@ -62,11 +62,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <td> : </td>
                                         <td> <span id="city"></span></td>
                                     </tr>
-                                    <tr>
-                                        <td>Credit Limit</td>
-                                        <td> : </td>
-                                        <td class="text-right"> <span id="creditLimit"></span></td>
-                                    </tr>
+<!--                                    <tr>-->
+<!--                                        <td>Credit Limit</td>-->
+<!--                                        <td> : </td>-->
+<!--                                        <td class="text-right"> <span id="creditLimit"></span></td>-->
+<!--                                    </tr>-->
                                     <tr>
                                         <td>Credit period</td>
                                         <td> : </td>
@@ -77,11 +77,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <td> : </td>
                                         <td class="text-right"><span id="cusOutstand"></span></td>
                                     </tr>
-                                    <tr>
-                                        <td>Available Limit</td>
-                                        <td> : </td>
-                                        <td class="text-right"><span id="availableCreditLimit"></span> </td>
-                                    </tr>
+<!--                                    <tr>-->
+<!--                                        <td>Available Limit</td>-->
+<!--                                        <td> : </td>-->
+<!--                                        <td class="text-right"><span id="availableCreditLimit"></span> </td>-->
+<!--                                    </tr>-->
 
                                     <tr>
                                         <td></td>

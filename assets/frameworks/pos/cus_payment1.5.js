@@ -87,7 +87,7 @@ $('.prd_icheck').iCheck({
                 newsalesperson:newsalesperson
             },
             success: function(data) {
-                console.log("Customer Data:", data); 
+                console.log("Customer Data:", data);
                 $("#customer").html('<option value="">Select Customer</option>');
                 
                 // Populate the dropdown with customers
@@ -113,6 +113,8 @@ $('.prd_icheck').iCheck({
         });
     });
 
+   
+
     $('#customer').on('change', function() {
         var cusCode = $(this).val(); 
         console.log("Customer Code selected:", cusCode);
@@ -127,10 +129,14 @@ $('.prd_icheck').iCheck({
         $("#tbl_payment tbody").html("");
     });
     cusCode =$("#customer").val();
+  
 
     if(cusCode!=''){
         loadCustomerDatabyId(cusCode);
     }
+
+
+
 
     $("#advanceno").autocomplete({
         source: function(request, response) {
@@ -224,19 +230,23 @@ function loadAdvanceData(pay_no){
             data: { payid: pay_no },
             success: function(data) {
                 var resultData = JSON.parse(data);
+                // console.log(resultData.return.ReturnAmount);
 
                 if (resultData.return){
-                    return_amount = parseFloat(resultData.return.ReturnAmount);
+                    return_amount =(resultData.return.ReturnAmount);
                     return_payment_no = resultData.return.ReturnNo;
-                    pay_amount = parseFloat(return_amount);
-                    $("#payAmount").val(return_amount);
+                  
+                    $("#returnPyment").text(Number(return_amount).toFixed(2));
                     // addPayment(cashAmount, creditAmount, cardAmount,chequeAmount,cusType,advance_amount,bank_amount,return_amount);
                 }
             }
         });
     }
 
-    function loadCustomerDatabyId(cuscode){
+
+    //customer autoload
+
+    function loadCustomerDatabyId(cusCode){
         $("#tbl_payment tbody").html("");
             total_due_amount = 0;
             total_over_payment = 0;
@@ -244,10 +254,11 @@ function loadAdvanceData(pay_no){
             $.ajax({
                 type: "POST",
                 url: "../../admin/Payment/getCustomersDataById",
-                data: { cusCode: cuscode},
+                data: { cusCode: cusCode},
                 success: function(data)
                 {
-                    var resultData = JSON.parse(data);
+                    var resultData =JSON.parse(data);
+                   
                     var returnComplete = 0;
 
                     if (resultData.over_return__complete_payments === null) {
@@ -258,19 +269,21 @@ function loadAdvanceData(pay_no){
 
                     cusCode = resultData.cus_data.CusCode;
                     outstanding = parseFloat(resultData.total_credit) - parseFloat(resultData.total_payment) - parseFloat(resultData.return_payment) + parseFloat(returnComplete);
-                    available_balance = parseFloat(resultData.cus_data.CreditLimit) - parseFloat(outstanding);
+                    available_balance = parseFloat(resultData.cus_data.CreditLimit) - parseFloat(settledAmount);
                     customer_name=resultData.cus_data.CusName;
                     $("#cusCode").html(resultData.cus_data.CusName);
                     $("#customer").val(resultData.cus_data.CusCode);
                     $("#creditLimit").html(accounting.formatMoney(resultData.cus_data.CreditLimit));
                     $("#creditPeriod").html(resultData.cus_data.CreditPeriod);
                     $("#returnPyment").html(accounting.formatMoney(resultData.return_payment));
-                    $("#returnAvailable").html(accounting.formatMoney(resultData.return_payments));
+                    $("#returnAvailable").html(accounting.formatMoney(resultData.available_balance));
                     $("#creditAmount").html(accounting.formatMoney(resultData.total_credit));
                     $("#settledAmount").html(accounting.formatMoney(resultData.total_payment));
                     $("#cusOutstand").html(accounting.formatMoney(outstanding));
                     $("#availableCreditLimit").html(accounting.formatMoney(available_balance));
                     $("#city").html(resultData.cus_data.MobileNo);
+                    // $("#newsalesperson").html(resultData.cus_data.RepName);
+                    // $("#route").html(resultData.cus_data.name);
 
 
                     var creditAmount = 0;
@@ -297,7 +310,7 @@ function loadAdvanceData(pay_no){
                         var isdueZero = creditAmount - settleAmount-returnAmount;
                         var isclose = (settleAmount == creditAmount);
                         if (isdueZero !== 0 && isclose === false){
-console.log('key',key);
+                        console.log('key',key);
                         $("#tbl_payment tbody").append("<tr id='" + z + "'>" +
                             "<td>" + z + "&nbsp;&nbsp;<input rowid='"+z+"' type='checkbox' name='rownum' class='prd_icheck rowcheck '></td>" +
                             "<td  class='invoiceNo'>" + paymentNo + "</td>" +
@@ -348,11 +361,13 @@ console.log('key',key);
 
 
     }
+
+
     //customer autoload
     // $("#customer").autocomplete({
     //     source: function(request, response) {
     //         cusType = $("#CustType option:selected").val();
-
+    //
     //         $.ajax({
     //             url: 'loadcustomersjson',
     //             dataType: "json",
@@ -377,7 +392,7 @@ console.log('key',key);
     //         $("#tbl_payment tbody").html("");
     //         total_due_amount = 0;
     //         total_over_payment = 0;
-
+    //
     //         $.ajax({
     //             type: "POST",
     //             url: "../../admin/Payment/getCustomersDataById",
@@ -385,15 +400,15 @@ console.log('key',key);
     //             success: function(data)
     //             {
     //                 var resultData = JSON.parse(data);
-
+    //
     //                 var returnComplete = 0;
-
+    //
     //                 if (resultData.over_return__complete_payments === null) {
     //                     returnComplete = 0.00;
     //                 } else {
     //                     returnComplete = resultData.over_return__complete_payments;
     //                 }
-
+    //
     //                 cusCode = resultData.cus_data.CusCode;
     //                 outstanding = parseFloat(resultData.total_credit) - parseFloat(resultData.total_payment) - parseFloat(resultData.return_payment) + parseFloat(returnComplete);
     //                 available_balance = parseFloat(resultData.cus_data.CreditLimit) - parseFloat(outstanding);
@@ -409,13 +424,15 @@ console.log('key',key);
     //                 $("#cusOutstand").html(accounting.formatMoney(outstanding));
     //                 $("#availableCreditLimit").html(accounting.formatMoney(available_balance));
     //                 $("#city").html(resultData.cus_data.MobileNo);
-
-
+    //                 $("#newsalesperson").html(resultData.cus_data.RepName);
+    //                 $("#route").html(resultData.cus_data.name);
+    //
+    //
     //                 var creditAmount = 0;
     //                 var settleAmount = 0;
     //                 var z = 1;
     //                 $.each(resultData.credit_data, function(key, value) {
-
+    //
     //                     var paymentNo = value.InvoiceNo;
     //                     var invDate = value.InvoiceDate;
     //                     var totalNetAmount = parseFloat(value.NetAmount);
@@ -425,7 +442,7 @@ console.log('key',key);
     //                     var customerPayment = parseFloat(value.payAmount);
     //                     var dueAmount = 0;
     //                     total_due_amount += (creditAmount - settleAmount-returnAmount);
-
+    //
     //                     var isdueZero = creditAmount - settleAmount-returnAmount;
     //                     var isclose = (settleAmount == creditAmount);
     //                     if (isdueZero !== 0 && isclose === false) {
@@ -443,8 +460,8 @@ console.log('key',key);
     //                     }
     //                    // $("#cusOutstand").html(accounting.formatMoney(total_due_amount));
     //                 });
-
-
+    //
+    //
     //                 // $.each(resultData.return_data, function(key, value) {
     //                 //
     //                 //     var paymentNo = value.InvoiceNo;
@@ -464,15 +481,23 @@ console.log('key',key);
     //                 //     $("#over_payment_rows").append("<tr style='background-color:#fbb5b5;' ><td>" + (key + 1) + "&nbsp;&nbsp;</td><td  class='invoiceNo'>" + paymentNo + " Return </td><td>" + invDate + "</td><td class='text-right'>" + accounting.formatMoney(totalNetAmount) + "</td><td class='text-right creditAmount'>" + accounting.formatMoney(creditAmount) + "</td><td class='text-right settleAmount' invPay='0'>" + accounting.formatMoney(0) + "</td><td class='text-right returnAmount' invPay='0'>" + accounting.formatMoney(settleAmount) + "</td><td class='text-right dueAmount' isColse='0'>" + accounting.formatMoney(creditAmount - settleAmount-returnAmount) + "</td><td></td></tr>");
     //                 //     // $("#cusOutstand").html(accounting.formatMoney(total_due_amount));
     //                 // });
-
+    //
     //                 // $("#tbl_payment").dataTable().fnDestroy();
     //             }
     //         });
-
-
+    //
+    //
     //     }
     // });
-
+    //
+    // function clearCustomerData() {
+    //     $("#cusCode").html('');
+    //     $("#cusAddress").html('');
+    //     $("#cusAddress2").html('');
+    //     $("#cusPhone").html('');
+    //     $("#newsalesperson").html('');
+    //     $("#route").html('');
+    // }
     $("#bank").select2({
         placeholder: "Select a bank",
         allowClear: true,
@@ -664,6 +689,7 @@ console.log('key',key);
     $("#pay").click(function() {
 
         var payType = $("#payType option:selected").val();
+       
         var paymentType = $("#payType option:selected").html();
         var payDate = $("#invDate").val();
         var chequeDate = $("#chequeDate").val();
@@ -671,18 +697,23 @@ console.log('key',key);
         var chequeReciveDate = $('#chequeReciveDate').val();
         var chequeNo = $('#chequeNo').val();
         var auto_payment = $("input[name=payAuto]:checked").val();
+      
         var location = $("#invlocation").val();
         var invUser = $("#invUser").val();
         var bank_acc = $("#bank_acc option:selected").val();
         var remark = $("#remark").val();
         var route = $("#route").val();
         var newsalesperson = $("#newsalesperson").val();
+        var cusCode = $("#customer").val();
         var change_amount = 0;
         var pay_amount2 = 0;
         var over_pay_amount = 0;
         var over_pay_inv = '';
         var selectedAmount =  $("#selectedAmount").val();
+      
         receiptType = $("#receiptType option:selected").val();
+        var payAmount = $("#payAmount").val();
+        
         //shalika
         var advanceno=$("#advanceno").val();
         var returnInvoice=$("#returnInvoice").val();
@@ -707,166 +738,9 @@ console.log('key',key);
        //receiptType
        if(receiptType==1){
             //pay autometically
-            if (auto_payment == 1) {
-                //shalika
-                if ($("#tbl_payment tbody tr").length==0) {
-
-                    $.notify("There is no invoice to pay.", "danger");
-                    return false;
-
-                }
-                //shalika
-                if (pay_amount == 0) {
-                    $.notify("Please enter pay amount.", "danger");
-                    return false;
-                } else {
-
-                    var r = confirm('Do you want to pay automatically?');
-                    if (r === true) {
-
-                        for (var i = 1; i <= $("#tbl_payment tbody tr").length; i++) {
-                            due_amount = parseFloat(accounting.unformat($("#tbl_payment tbody").find("[id='" + i + "']").children('.dueAmount').html()));
-                            credit_amount = parseFloat(accounting.unformat($("#tbl_payment tbody").find("[id='" + i + "']").children('.creditAmount').html()));
-                            settle_amount = parseFloat(accounting.unformat($("#tbl_payment tbody").find("[id='" + i + "']").children('.settleAmount').html()));
-
-                            if (due_amount <= pay_amount) {
-                                var due_amount3 = due_amount;
-                                var pay_amount3 = pay_amount;
-
-                                $("#" + i + " .settleAmount").attr('invPay', (due_amount));
-                                total_settle += due_amount;
-                                pay_amount -= due_amount;
-                                settle_amount = settle_amount + due_amount;
-
-                                change_amount = 0;
-                                due_amount = change_amount;
-                                //over payment for last invoice
-                                if (i == $("#tbl_payment tbody tr").length) {
-                                    if (due_amount3 < pay_amount3) {
-                                        var q = confirm('Your Payment greater than the due amount. Do you want to continue this over payment? *Cancel to pay only due amount');
-                                        if (q === true) {
-
-                                            total_settle = pay_amount;
-                                            settle_amount = settle_amount + pay_amount;
-
-                                            over_pay_amount = credit_amount - settle_amount;
-                                            over_pay_inv = $("#" + i + " .invoiceNo").html();
-                                            change_amount = over_pay_amount;
-                                            due_amount = change_amount;
-                                            $("#" + i + " .settleAmount").attr('invPay', settle_amount);
-                                        } else {
-                                            total_settle = due_amount;
-                                            settle_amount = settle_amount + due_amount;
-                                            change_amount = 0;
-                                            due_amount = change_amount;
-                                        }
-                                    }
-                                }
-
-                            } else if (due_amount > pay_amount) {
-                                $("#" + i + " .settleAmount").attr('invPay', (pay_amount));
-                                change_amount = due_amount - pay_amount;
-                                settle_amount = settle_amount + pay_amount;
-                                total_settle += pay_amount;
-                                due_amount = change_amount;
-                                pay_amount -= due_amount;
-
-                                if (total_settle > pay_amount) {
-                                    pay_amount = 0;
-                                }
-                            }
-
-                            if (settle_amount >= credit_amount) {
-                                isInvoiceColse = 1;
-                            } else {
-                                isInvoiceColse = 0;
-                            }
-
-                            if ($("#" + i + " .settleAmount").attr('invPay') > 0) {
-                                $("#" + i).addClass("rowselected").siblings();
-                            }
-
-                            $("#tbl_payment tbody").find("[id='" + i + "']").children('.dueAmount').html(accounting.formatMoney(change_amount));
-                            $("#tbl_payment tbody").find("[id='" + i + "']").children('.settleAmount').html(accounting.formatMoney(settle_amount));
-                        }
-
-                        pay_amount2 = parseFloat($("#payAmount").val());
-                        if (total_settle < pay_amount2) {
-                            total_settle = pay_amount2;
-                        }
-    //                    $("#payAmount").val(0);
-                        $("#totalPayment").html(accounting.formatMoney(total_settle));
-
-                        var credit_invoice = new Array();
-                        var cus_settle_amount = new Array();
-                        var cus_credit_amount = new Array();
-                        var cus_inv_payment = new Array();
-                        var rowCounts = $("#tbl_payment tbody tr").length;
-
-                        for (var k = 1; k <= rowCounts; k++) {
-                            credit_invoice.push($("#" + k + " .invoiceNo").html());  //pushing all the product_code listed in the table
-                            cus_settle_amount.push(accounting.unformat($("#" + k + " .settleAmount").html()));   //pushing all the qty listed in the table
-                            cus_credit_amount.push(accounting.unformat($("#" + k + " .creditAmount").html()));
-                            cus_inv_payment.push(accounting.unformat($("#" + k + " .settleAmount").attr('invPay')));
-                        }
-
-                        var sendCredit_invoice = JSON.stringify(credit_invoice);
-                        var sendCus_settle_amount = JSON.stringify(cus_settle_amount);
-                        var sendCus_credit_amount = JSON.stringify(cus_credit_amount);
-                        var sendCus_inv_payment = JSON.stringify(cus_inv_payment);
-                        over_pay_amount = Math.abs(over_pay_amount);
-
-                        console.log(return_payment_no);
-                        $("#pay").attr('disabled', true);
-                        $.ajax({
-                            type: "POST",
-                            url: "../../admin/Payment/customerPayment",
-                            data: {receiptType:receiptType,advance_payment_no:advance_payment_no,return_payment_no:return_payment_no,bank_acc:bank_acc,paymentNo: paymentNo, location: location, remark: remark,
-                                invUser: invUser, invNo: invoiceNo, cusCode: cusCode,outstanding:outstanding, payAmount: pay_amount2, payType: payType, bank: bank,
-                                chequeReference: chequeReference, chequeRecivedDate: chequeReciveDate, chequeDate: chequeDate, payDate: payDate, settleAmount: settle_amount,
-                                isInvoiceColse: isInvoiceColse, chequeNo: chequeNo, credit_invoice: sendCredit_invoice, cus_credit_amount: sendCus_credit_amount,
-                                cus_settle_amount: sendCus_settle_amount, total_settle: total_settle, cus_inv_payment: sendCus_inv_payment, over_pay_amount: over_pay_amount,
-                                over_pay_inv: over_pay_inv,route:routem,newsalesperson:newsalesperson},
-                            success: function(data)
-                            {
-                                var resultData = JSON.parse(data);
-                                var feedback = resultData['fb'];
-                                var invNumber = resultData['InvNo'];
-                                var invoicedate = resultData['InvDate'];
-                                if (feedback == 1) {
-                                    $("#reset").attr('disabled', false);
-                                    $.notify("Payment successfully saved.", "success");
-                                    outstanding = outstanding - total_settle;
-                                    printReceipt(invNumber,paymentType);
-                                    invoicePrint(invNumber,invoicedate,'invfname',total_settle,disPrint,payType,chequeDate,chequeNo,bank_name,receiptType,remark,paymentType);
-                                    rid = 0;
-                                    invoiceNo = 0;
-
-                                    outstanding = outstanding - total_settle;
-                                    available_balance = parseFloat(available_balance) + total_settle;
-
-                                    $("#cusOutstand").html(accounting.formatMoney(outstanding));
-                                    $("#total_due").html(accounting.formatMoney(outstanding));
-
-                                    $("#availableCreditLimit").html(accounting.formatMoney(available_balance));
-                                    $("#chequeData").hide();
-                                    clearPaymentDetails();
-                                    total_settle = 0;
-                                    $("#pay").attr('disabled', true);
-                                }
-                                else {
-                                    $.notify("Payment not saved.", "danger");
-                                    return false;
-                                }
-                            }
-                        });
-                    }
-                    else {
-                        return false;
-                    }
-                }
-            }
-            else if (auto_payment == 2) {
+           
+            if (auto_payment == 2) {
+               
                 //pay manually
                 if (selectedRowArr.length  == 0) {
                     $.notify("Please select an invoice.", "danger");
@@ -877,21 +751,11 @@ console.log('key',key);
                     return false;
                 } else {
 
-                    if (selectedAmount < pay_amount) {
-
-                        var final_due_amount = Array.from($("#tbl_payment tbody tr")).map(function(row){
-                            return parseFloat($(row).find('.dueAmount').html().replace(',',''));
-                        }).reduce(function(acc,it){return acc+it});
-
-                        if (final_due_amount >  pay_amount) {
-
-                            $.notify("Pay amount is more than selected amount. Please select next row", "danger");
-                            return false;
-                        }
-
-                    }
-
-                    var r = confirm('Do you want to pay manually?');
+                    if(parseFloat(payAmount)>parseFloat(selectedAmount)){
+                        $("#errPayment").html('You Cant pay Over SettleAmount.').addClass('alert alert-danger alert-dismissible alert-sm').fadeOut(600);
+                        return false;
+                    }else{
+                        var r = confirm('Do you want to pay manually?');
                     if (r === true) {
                         
                         for (var i = 0; i < selectedRowArr.length; i++) {
@@ -1012,7 +876,7 @@ console.log('key',key);
                                     $.notify("Payment successfully saved.", "success");
                                     outstanding = outstanding - total_settle;
                                     printReceipt(invNumber,paymentType);
-                                    invoicePrint(invNumber,invoicedate,'invfname',total_settle,disPrint,payType,chequeDate,chequeNo,bank_name,receiptType,remark,paymentType);
+                                    //invoicePrint(invNumber,invoicedate,'invfname',total_settle,disPrint,payType,chequeDate,chequeNo,bank_name,receiptType,remark,paymentType);
                                     rid = 0;
                                     invoiceNo = 0;
 
@@ -1038,6 +902,9 @@ console.log('key',key);
                     else {
                         return false;
                     }
+                    }
+
+                    
                 }
             }
 
@@ -1096,7 +963,7 @@ console.log('key',key);
                                     $.notify("Advance Payment successfully saved.", "success");
                                     outstanding = outstanding - total_settle;
                                     printReceipt(invNumber,paymentType);
-                                    invoicePrint(invNumber,invoicedate,'invfname',total_settle,disPrint,payType,chequeDate,chequeNo,bank_name,receiptType,remark,paymentType);
+                                    //invoicePrint(invNumber,invoicedate,'invfname',total_settle,disPrint,payType,chequeDate,chequeNo,bank_name,receiptType,remark,paymentType);
                                     rid = 0;
                                     invoiceNo = 0;
 

@@ -41,12 +41,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="box-body table-responsive">
                         <table class="table table-bordered" id="customertbl">
                             <thead>
-                                <tr>
+                            <tr style="background-color: #1fbfb8">
                                     <td>Name</td>
                                     <td>Phone</td>
                                     <td>Address</td>
-                                    <td>Vehicle No</td>
-                                    <td>Chassis No</td>
+                                   
                                 </tr>
                             </thead>
                             <tbody>
@@ -87,8 +86,7 @@ var customertbl = $('#customertbl').dataTable({
                         {"data": "CusName","searchable": true},
                         {"data": "MobileNo"},
                         {"data": "Address01"},
-                        {"data": "RegNo","searchable": true},
-                        {"data": "ChassisNo"}
+                      
                         
                     ]
     });

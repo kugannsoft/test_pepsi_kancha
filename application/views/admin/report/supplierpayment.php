@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="box-body">
                         <div class="row">
                             <form id="filterform">
-                                <div class="row">
+
                                 <div class="col-md-3">
                                        <select class="form-control" name="customer" id="customer">
                                             <option value="">--select customer--</option>
@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 </div>
                             </form>
 
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="box-body table-responsive">
                         <table id="saletable" class="table table-bordered">
                             <thead>
-                                <tr>
+                            <tr style="background-color: #1fbfb8">
                                     <td>Paid Date</td>
                                     <td>Payment No</td>
                                     <td>Mode</td>

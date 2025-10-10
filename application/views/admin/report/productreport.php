@@ -96,11 +96,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="box-body  table-responsive">
                         <table id="saletable" class="table table-bordered  table-hover table-fixed">
                             <thead>
-                                <tr style="font-size: large">
+                            <tr style="background-color: #1fbfb8" >
                                     <td>id</td>
                                     <td>Product Code</td>
                                     <td>Product Name</td>
-                                    <td>Location</td>
+
                                     <td>Stock</td>
                                     <td>ROL</td>
                                     <td>ROQ</td>
@@ -110,25 +110,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <td>Cost Value</td>
                                     <td>Estimate Profit</td>
                                     <td>Supplier</td>
+                                    <td>Damage Qty</td>
+                                    <td>Expired Qty</td>
+                                    <td>Normal Return Qty</td>
                                 </tr>
                             </thead>
                             <tbody>
+
                             </tbody>
                             <tfoot>
                                 <tr>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
+
                                     <td><b>Total</b></td>
-                                    <td id="totalstock"></td>
+                                    <td id="totalstock"  style="text-align: right;font-weight:bold;color: #00aaf1;"></td>
                                     <td></td>
                                     <td></td>
                                     <td colspan="2"></td>
-                                    <td id="totalvalue"></td>
-                                    <td id="totalcost"></td>
-                                    <td id="totalprofit"></td>
+                                    <td id="totalvalue"  style="text-align: right;font-weight:bold;color: #00aaf1;"></td>
+                                    <td id="totalcost"  style="text-align: right;font-weight:bold;color: #00aaf1;"></td>
+                                    <td id="totalprofit"  style="text-align: right;font-weight:bold;color: #00aaf1;"></td>
                                     <td></td>
-
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -342,7 +348,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         e.preventDefault();
         $.ajax({
             type: 'POST',
-            url: "loadreport3",
+            url: "loadreport5",
             data: $(this).serialize(),
             success: function(data) {
                 $('#saletable tbody').empty();
@@ -355,6 +361,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     var totalValue = 0;
     var totalProfit = 0;
     function drawTable(data) {
+        console.log(data);
         totalCostValue = 0;
         totalValue = 0;
         totalProfit = 0;
@@ -364,7 +371,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         $("#totalprofit").html(0);
         $("#totalstock").html(0);
         $.each(data, function(key, value) {
-            $("#saletable").append("<tr style='background-color:#00a678;color:#fff;'><td colspan='13'><b>" + key + "</b></td></tr>");
+            $("#saletable").append("<tr style='background-color:#00a678;color:#fff;'><td colspan='13'><b>" + key + "</b></td><td><b><b></td><td><b><b></td></tr>");
 
             for (var i = 0; i < value.length; i++) {
                 drawRow(value, i);
@@ -382,7 +389,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
     function drawRow(rowData, index) {
-
         if (parseFloat(rowData[index].Stock) < rowData[index].Prd_ROL) {
             var row = $("<tr class='stockout'>");
         } else {
@@ -393,16 +399,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         row.append($("<td>" + (index + 1) + "</td>"));
         row.append($("<td>" + rowData[index].ProductCode + "</td>"));
         row.append($("<td>" + rowData[index].Prd_Description + "</td>"));
-        row.append($("<td>" + rowData[index].location + "</td>"));
+
         row.append($("<td>" + rowData[index].Stock + "</td>"));
         row.append($("<td>" + rowData[index].Prd_ROL + "</td>"));
         row.append($("<td>" + rowData[index].Prd_ROQ + "</td>"));
-        row.append($("<td>" + rowData[index].Prd_CostPrice + "</td>"));
-        row.append($("<td>" + rowData[index].ProductPrice + "</td>"));
-        row.append($("<td>" + accounting.formatMoney(rowData[index].ProductPrice * rowData[index].Stock) + "</td>"));
-        row.append($("<td>" + accounting.formatMoney(rowData[index].Prd_CostPrice * rowData[index].Stock) + "</td>"));
-        row.append($("<td>" + accounting.formatMoney((rowData[index].ProductPrice * rowData[index].Stock) - (rowData[index].Prd_CostPrice * rowData[index].Stock)) + "</td>"));
+        row.append($("<td style='text-align: right;'>" + rowData[index].Prd_CostPrice + "</td>"));
+        row.append($("<td style='text-align: right;'>" + rowData[index].ProductPrice + "</td>"));
+        row.append($("<td style='text-align: right;'>" + accounting.formatMoney(rowData[index].ProductPrice * rowData[index].Stock) + "</td>"));
+        row.append($("<td style='text-align: right;'>" + accounting.formatMoney(rowData[index].Prd_CostPrice * rowData[index].Stock) + "</td>"));
+        row.append($("<td style='text-align: right;'>" + accounting.formatMoney((rowData[index].ProductPrice * rowData[index].Stock) - (rowData[index].Prd_CostPrice * rowData[index].Stock)) + "</td>"));
         row.append($("<td>" + rowData[index].SupName + "</td>"));
+        row.append($("<td>" + (rowData[index].Damage != null ? rowData[index].Damage : 0) + "</td>"));
+        row.append($("<td>" + (rowData[index].Expired != null ? rowData[index].Expired : 0) + "</td>"));
+        row.append($("<td>" + (rowData[index].Expired != null ? rowData[index].Expired : 0) + "</td>"));
     }
     function printdiv() {
         $("#saletable").print({

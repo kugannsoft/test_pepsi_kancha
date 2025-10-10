@@ -14,20 +14,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <div class="row">
                             <form id="filterform">
                                 <div class="col-md-2">
-                                    <select class="form-control" name="route" id="route" >
-                                        <option value="">--Select Route--</option>
-                                        <?php foreach ($routes AS $route) { ?>
-                                            <option value="<?php echo $route->id ?>"><?php echo $route->name ?></option>
+                                    <select class="form-control" name="newsalesperson" id="newsalesperson" >
+                                        <option value="">--Select Salesperson--</option>
+                                        <?php foreach ($salespersons AS $salesperson) { ?>
+                                            <option value="<?php echo $salesperson->RepID ?>"><?php echo $salesperson->RepName ?></option>
                                         <?php } ?>
                                     </select>
                                     <!-- <input type="hidden" name="route_ar" id="route_ar"> -->
                                 </div>
                                 <div class="col-md-2">
+                                    <select class="form-control" name="route" id="route" >
+                                        <option value="">--Select Route--</option>
+
+                                    </select>
+
+                                </div>
+                                <div class="col-md-2">
                                     <select class="form-control" name="customer" id="customer" >
                                         <option value="">--Select Customer--</option>
-                                      
+
                                     </select>
-                                    
+
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-daterange input-group" id="datepicker">
@@ -36,12 +43,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         <input type="text" class="form-control" name="enddate"  id="enddate" value="<?php echo date("Y-m-d") ?>"/>
                                     </div>
                                 </div>
-                                
-                                <div class="col-md-2">
+
+                                <div class="col-md-1">
                                     <button type="submit" class="btn btn-flat btn-success">Show</button>
                                 </div>
                             </form>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <button onclick="printdiv()" class="btn btn-flat btn-default">Print</button>
                             </div>
                         </div>
@@ -56,10 +63,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <table id="saletable" class="table table-bordered">
                             <thead>
                             <tr style="background-color: #1fbfb8">
-                                <td>Invoice No</td>
+                                <td>Invoice NO</td>
+                                <td>Invoice Date</td>
                                 <td>Customer</td>
-                                <td>Qty</td>
-                                <td>Amount</td>
+                                <td>Handle By</td>
+                                <td>Credit Amount</td>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -69,6 +78,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <th></th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
+                                <th></th>
+
                             </tfoot>
                         </table>
                     </div>
@@ -91,24 +103,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         format: 'yyyy-mm-dd'
     });
 
+    $('#newsalesperson').on('change', function() {
+        var salespersonID = $(this).val();
+        if (salespersonID != "0") {
+
+            $.ajax({
+                url: "<?php echo base_url(); ?>" + "admin/customer/findemploeeroute",
+                method: 'POST',
+                data: { salespersonID: salespersonID },
+                dataType: 'json',
+                success: function(response) {
+
+                    $('#route').empty();
+                    $('#route').append('<option value="0">-Select-</option>');
+
+                    $.each(response, function(index, routeID) {
+                        console.log(routeID);
+                        $('#route').append('<option value="'+ routeID.route_id +'">'+ routeID.route_name +'</option>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching routes:', error);
+                }
+            });
+        } else {
+            $('#route').empty();
+            $('#route').append('<option value="0">-Select-</option>');
+        }
+    });
+
     $('#route').on('change', function() {
         var routeID = $(this).val();
         if (routeID != "0") {
-           
+
             $.ajax({
                 url: "<?php echo base_url(); ?>" + "admin/sales/findroutecustomer",
                 method: 'POST',
                 data: { routeID: routeID },
                 dataType: 'json',
                 success: function(response) {
-                    
+
                     $('#customer').empty();
                     $('#customer').append('<option value="0">-Select-</option>');
-                    
+
                     $.each(response, function(index, customers) {
-                    console.log(customers);
-                    $('#customer').append('<option value="'+ customers.CusCode +'">'+ customers.CusName +'</option>');
-                });
+                        console.log(customers);
+                        $('#customer').append('<option value="'+ customers.CusCode +'">'+ customers.CusName +'</option>');
+                    });
                 },
                 error: function(xhr, status, error) {
                     console.error('Error fetching customer:', error);
@@ -120,45 +161,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         }
     });
 
-   
 
     $('#filterform').submit(function (e) {
         e.preventDefault();
-     
+
         $.ajax({
             type: 'POST',
-            url: "<?php echo base_url(); ?>" + "admin/report/loadroutewisereport",
+            url: "loadroutewisereport",
             data: $(this).serialize(),
             success: function(response) {
                 if (typeof response === 'string') {
                     response = JSON.parse(response);
                     console.log(response);
+                    CreditAmount =0;
+                    SettledAmount = 0;
+                    ReturnAmount = 0;
                     let data = response.data;
-                    let totalQty = 0; 
-                    let totalAmount = 0;
                     if (Array.isArray(data)) {
                         $('#saletable tbody').empty();
                         if (data.length > 0) {
                             $.each(data, function(index, item) {
                                 $('#saletable tbody').append(`
                                     <tr>
-                                        <td>${item.SalesInvNo}</td>
+                                        <td>${item.InvoiceNo}</td>
+                                        <td>${item.InvoiceDate}</td>
                                         <td>${item.DisplayName}</td>
-                                        <td>${item.SalesQty}</td>
-                                        <td>${item.SalesTotalAmount}</td>
+                                        <td>${item.emp_id}</td>
+                                        <td>${item.CreditAmount}</td>
+
                                     </tr>
                                 `);
-                                totalQty += parseFloat(item.SalesQty);
-                                totalAmount += parseFloat(item.SalesTotalAmount);
-                            });
-                            $('#saletable tfoot').html(`
-                            <tr>
-                                <th colspan="2" class="text-right">Total:</th>
-                                <th>${totalQty.toFixed(2)}</th>
-                                <th>${totalAmount.toFixed(2)}</th>
-                            </tr>
-                            `);
-                            
+                            })
                         }else{
                             $('#saletable tbody').append(`
                                 <tr>
@@ -168,8 +201,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         }
                     }
                 }
-              
-                
+
+
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('Error:', textStatus, errorThrown);
@@ -189,5 +222,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             title:'Daily Loading Report '+datebalance
         });
     }
-    
+
 </script>
