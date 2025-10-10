@@ -177,22 +177,88 @@ class Customer_model extends CI_Model {
     }
     
      //-------------sale person data----------------------------------------------------
-    public function insert_saleperson($data) {
-        $this->db->trans_start();
-        $data['RepID'] = $this->get_max_code('salespersons');
-        $this->db->insert('salespersons', $data);
-        $this->update_max_code('salespersons');
-        $this->db->trans_complete();
-        return $this->db->trans_status();
+public function insert_saleperson($data) {
+    $this->db->where('username', $data['username']);
+    $query = $this->db->get('salespersonsaccount');
+
+    if ($query->num_rows() > 0) {
+        return 'Username already exists';
     }
+    $this->db->trans_start();
+
+    // Generate new RepID
+    $data['RepID'] = $this->get_max_code('salespersons');
+
+    // Save account data before removing from main data
+    $accountData = [
+        'spId' => $data['RepID'],                // EmpNo used as spId
+        'username' => $data['username'],
+        'password' => $data['password'],         // Consider hashing!
+        'IsActive' => $data['IsActive']
+    ];
+
+    // Remove fields not belonging to 'salespersons' table
+    unset($data['username']);
+    unset($data['password']);
+
+    // Insert into salespersons
+    $this->db->insert('salespersons', $data);
+
+    // Insert into salespersonsaccount
+    $this->db->insert('salespersonsaccount', $accountData);
+
+    // Update RepID counter
+    $this->update_max_code('salespersons');
+
+    $this->db->trans_complete();
+
+    return $this->db->trans_status();
+}
+
 
     public function get_saleperson($supplier) {
-        return $this->db->select()->from('salespersons')->where('RepID', $supplier)->get()->row();
+    return $this->db
+        ->select('salespersons.*, salespersonsaccount.username, salespersonsaccount.password, salespersonsaccount.IsActive AS AccountIsActive')
+        ->from('salespersons')
+        ->join('salespersonsaccount', 'salespersons.RepID = salespersonsaccount.spId', 'left')
+        ->where('salespersons.RepID', $supplier)
+        ->get()
+        ->row();
+}
+
+
+ public function update_saleperson($salespersonData, $accountData, $supplier) {
+    // Step 1: Check if username exists for a different spId
+    $this->db->where('username', $accountData['username']);
+    $this->db->where('spId !=', $supplier);
+    $query = $this->db->get('salespersonsaccount');
+
+    if ($query->num_rows() > 0) {
+        return 'Username already exists';
     }
 
-    public function update_saleperson($data, $supplier) {
-        return $this->db->update('salespersons', $data, array('RepID' => $supplier));
+    // Step 2: Begin transaction
+    $this->db->trans_start();
+
+    // Update salespersons table
+    $this->db->where('RepID', $supplier);
+    $this->db->update('salespersons', $salespersonData);
+
+    // Update salespersonsaccount table
+    $this->db->where('spId', $supplier);
+    $this->db->update('salespersonsaccount', $accountData);
+
+    $this->db->trans_complete();
+
+    // Step 3: Check for errors
+    if ($this->db->trans_status() === FALSE) {
+        return 'Error updating salesperson';
     }
+
+    return true;
+}
+
+
 
     public function selectSupplierdata($id) {
         return $this->db->select()->from('supplier')->where('SupCode', $id)->get()->row();

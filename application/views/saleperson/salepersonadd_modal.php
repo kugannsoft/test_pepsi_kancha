@@ -40,8 +40,15 @@
                         <?php } ?>
                     </select>
                     <!-- <input type="text" class="form-control" name="contactperson" id="contactperson" placeholder="Enter customer nic"> -->
-                </div>
                 
+
+                
+                </div>
+                <div class="form-group">
+                    <label for="mobile">UserName</label>
+                    <input type="text"  class="form-control" name="username" id="username"  
+                     required>
+                </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
@@ -62,15 +69,17 @@
                     <input type="text"  class="form-control" name="mobile" id="mobile"  maxlength="12" 
                     value="+94" required pattern="\+94\d{9}" title="Please enter a valid mobile number starting with +94 and followed by 9 digits.">
                 </div>
-               <!--  <div class="form-group">
-                    <label for="office">Office No</label>
-                    <input type="text"  class="form-control" name="office" id="office" >
-                </div>
+
                 <div class="form-group">
-                    <label for="fax">Fax No</label>
-                    <input type="text"  class="form-control" name="fax" id="fax" >
-                </div> -->
+                    <label for="mobile">Password</label>
+                    <input type="password"  class="form-control" name="password" id="password"   
+                     required>
+                </div>
+                
+            
             </div>
+            
+                
             <div class="col-md-4">
             <div class="form-group">
                     <label for="address"> Remark </label>
@@ -81,6 +90,7 @@
                     <input type="text"  class="form-control" name="empno" id="empno" placeholder="Employee No">
                 </div>
                
+                
                 <div class="form-group">
                     <label for="isactive">Is Active </label>
                     <input type="checkbox" class="sup_icheck"  name="isactive" id="isactive" value="1">
@@ -121,17 +131,20 @@
         increaseArea: '50%'
     });
     $('#addsupplierform').submit(function (e) {
+        var ab= $(this).serializeArray();
+
         e.preventDefault();
         $.ajax({
             url: "<?php echo base_url('admin/sales/savesaleperson/') ?>",
             type: "POST",
             data: $(this).serializeArray(),
             success: function (data) {
+   console.log(data);
                 if (data == 1) {
                     $.notify("Employee Added Successfully..!", "success");
                     $('#suppliermodal').modal('hide');
                 }else{
-                    $.notify("Error..!", "warning");
+                    $.notify(data, "warning");
                 }
             }
         });

@@ -40,7 +40,11 @@
                     </select>
                     <!-- <input type="text" class="form-control" name="contactperson" id="contactperson" placeholder="Enter customer nic"> -->
                 </div>
-                
+                <div class="form-group">
+                    <label for="mobile">UserName</label>
+                    <input type="text" value="<?php echo $saleperson->username;?>"  class="form-control" name="username" id="username"  
+                     required>
+                </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
@@ -59,6 +63,11 @@
                 <div class="form-group">
                     <label for="mobile">Mobile No</label>
                     <input type="text"  class="form-control" value="<?php echo $saleperson->ContactNo;?>"  name="mobile" id="mobile" >
+                </div>
+                 <div class="form-group">
+                    <label for="mobile">Password</label>
+                    <input type="password" value="<?php echo $saleperson->password;?>" class="form-control" name="password" id="password"   
+                     required>
                 </div>
                <!--  <div class="form-group">
                     <label for="office">Office No</label>
@@ -138,6 +147,8 @@
             success: function (data) {
                 if (data == 1) {
                     $('#suppliermodal').modal('hide');
+                }else{
+                      $.notify(data, "warning");
                 }
             }
         });

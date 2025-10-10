@@ -47,6 +47,7 @@ class Sales extends Admin_Controller {
 
     public function loadmodal_editsaleperson($supplier) {
         $this->data['saleperson'] = $this->Customer_model->get_saleperson($supplier);
+
         $this->data['skill'] = $this->db->select('*')->from('skill_level')->get()->result();
         $this->data['type'] = $this->db->select('*')->from('emp_type')->get()->result();
         // $this->data['title'] = $this->Customer_model->selecttitles();
@@ -70,31 +71,46 @@ class Sales extends Admin_Controller {
         $data['IsTec'] = isset($_POST['istec']) ? $_POST['istec'] : 0;
         $data['IsAccount'] = isset($_POST['isacc']) ? $_POST['isacc'] : 0;
         $data['IsActive'] = isset($_POST['isactive']) ? $_POST['isactive'] : 0;
+        $data['username'] = $_POST['username'];
+        $data['password'] = $_POST['password'];
+        
         $result = $this->Customer_model->insert_saleperson($data);
         echo $result;
         die;
     }
 
     public function editsaleperson($supplier) {
-        $data['RepID'] = $_POST['rep_id'];
-        $data['RepName'] = $_POST['name'];
-         $data['Skill'] = $_POST['skill'];
-        // $data['RepImage'] = $_POST['image'];
-        $data['Remark'] = $_POST['remark'];
-         $data['Skill'] = $_POST['skill'];
-        $data['EmpNo'] = $_POST['empno'];
-        $data['ContactNo'] = $_POST['mobile'];
-        $data['LocationCode'] = $_POST['location'];
-        $data['Email'] = $_POST['email'];
-       $data['IsSalesPerson'] = isset($_POST['issale']) ? $_POST['issale'] : 0;
-        $data['IsTec'] = isset($_POST['istec']) ? $_POST['istec'] : 0;
-        $data['IsAccount'] = isset($_POST['isacc']) ? $_POST['isacc'] : 0;
-        $data['IsActive'] = isset($_POST['isactive']) ? $_POST['isactive'] : 0;
-        $data['RepType'] = $_POST['emp_type'];
-        $result = $this->Customer_model->update_saleperson($data,$supplier);
-        echo $result;
-        die;
-    }
+    // Data for 'salespersons' table
+    $salespersonData = [
+        'RepID'         => $_POST['rep_id'],
+        'RepName'       => $_POST['name'],
+        'Skill'         => $_POST['skill'],
+        'Remark'        => $_POST['remark'],
+        'EmpNo'         => $_POST['empno'],
+        'ContactNo'     => $_POST['mobile'],
+        'LocationCode'  => $_POST['location'],
+        'Email'         => $_POST['email'],
+        'IsSalesPerson' => isset($_POST['issale']) ? $_POST['issale'] : 0,
+        'IsTec'         => isset($_POST['istec']) ? $_POST['istec'] : 0,
+        'IsAccount'     => isset($_POST['isacc']) ? $_POST['isacc'] : 0,
+        'IsActive'      => isset($_POST['isactive']) ? $_POST['isactive'] : 0,
+        'RepType'       => $_POST['emp_type'],
+    ];
+
+    // Data for 'salespersonsaccount' table
+    $accountData = [
+        'username' => $_POST['username'],
+        'password' => $_POST['password'], // ⚠️ Consider hashing
+        'IsActive' => isset($_POST['isactive']) ? $_POST['isactive'] : 0,
+    ];
+
+    // Run the model update function
+    $result = $this->Customer_model->update_saleperson($salespersonData, $accountData, $supplier);
+
+    echo $result;
+    die;
+}
+
 
     public function loadmodal_routeconfig($supplier) {
         $this->data['routes'] = $this->db->select('*')->from('customer_routes')->get()->result();

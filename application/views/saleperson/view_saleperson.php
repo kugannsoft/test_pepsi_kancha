@@ -125,6 +125,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     });
 
     function editm(d) {
+   
         $('.modal-content').load('<?php echo base_url() ?>admin/sales/loadmodal_editsaleperson/' + d, function (result) {
             $('#suppliermodal').modal({show: true});
         });
