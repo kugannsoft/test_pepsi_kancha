@@ -91,12 +91,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <td style="text-align:left;">Date</td>
                     <td >:</td>
                     <td colspan="2" style="text-align:right;"><?php echo date('Y-m-d',strtotime($orderHead->date));?>&nbsp;</td>
+
                 </tr> 
+                </tr>
               
                 <tr style="text-align:left;font-size:13px;">
                     <td style="padding-top:0px;font-size:13px;text-align:left;">Sales Rep </td>
                     <td style="">:</td>
                     <td colspan="2" style="font-size:13px;text-align:right;"><?php echo $orderHead->RepName; ?></td>
+                    <td colspan="2" style="font-size:13px;text-align:right;"><?php echo $orderHead->salesPerson ?></td>
                 </tr>
                
 
@@ -159,6 +162,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <td style="text-align:right;padding: 3px;border-right: 1px #000000 solid;border-bottom: 1px #000 solid;">Sub Total </td>
                         <td id="lbltotalPOAmount"   style='text-align:right;padding: 3px;border-bottom: 1px #000000 solid;'><?php echo number_format($orderHead->grossAmount,2);?></td>
                         </tr>
+
                        
                         <?php if($orderHead->isInvoiceDiscount ==1){?>
                          <tr style="line-height:25px;" id="rowDiscount">
@@ -217,6 +221,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <td style="border-right:1px solid #000000;"><?php echo $invdata->productName;?></td>
 
                         <td style="border-right:1px solid #000000; text-align:center;"><?php echo number_format(($invdata->saleQuantity),0)?></td>
+
                         <td style="border-right:1px solid #000000; text-align:center;">
                     <?php
                 echo ($invdata->ReturnType == 1) ? 'Normal Return' :
@@ -224,6 +229,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     (($invdata->ReturnType == 3) ? 'Expired Return' : 'Sales'));
                 ?>
                     </td>
+                        <td style="border-right:1px solid #000000; text-align:center;"><?php echo number_format(($invdata->ReturnType),0)?></td>
                          </tr>
                     <?php $i++;
                     }
