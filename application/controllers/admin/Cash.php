@@ -265,6 +265,12 @@ class Cash extends Admin_Controller {
         
         $this->db->trans_start();
         $this->db->query("CAll SPT_SAVE_CASIHER_BALANCE('1','$float','$BalanceDate','$datetime','$mode','$loc','$id','$invUser')");
+    //    $db_error = $this->db->error();
+    // if (!empty($db_error['message'])) {
+    //     // Log or output the error
+    //     var_dump($db_error);
+    // }
+
         $this->db->trans_complete();
         $res2 =  $this->db->trans_status();
 

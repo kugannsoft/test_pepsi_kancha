@@ -658,6 +658,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <li class="<?= active_link_function('loadingreport') ?>">
                                     <a href="<?php echo site_url('admin/report/loadingreport'); ?>">Loading Report</a>
                                 </li>
+                         <li class="<?= active_link_function('loadingreport') ?>">
+                                    <a href="<?php echo site_url('admin/report/loadingreportproductwise'); ?>">Product Wise Report</a>
+                                </li>
                          
                         </ul>
                     </li>

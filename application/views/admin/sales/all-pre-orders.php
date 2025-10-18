@@ -51,9 +51,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <td>Temp Order No</td>
                         <td>Order Date & Time</td>
                         <td>Sales Person</td>
+                        <td>Customer Name</td>
                         <td>Route</td>
                         <td>Order Amount</td>
-
                         <td>Status</td>
                         <td>###</td>
                         <td>###</td>
@@ -94,6 +94,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     {"data": "tempInvNo"},
                     {"data": "date"},
                     {"data": "RepName"},
+                    {"data": "cusName"},
+                    
                     {"data": "name"},
                     {
                         "data": "grossAmount",

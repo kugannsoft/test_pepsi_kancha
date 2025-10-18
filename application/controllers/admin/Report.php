@@ -2095,6 +2095,18 @@ public function loadreport1() {
         $this->template->admin_render('admin/report/loadingreport', $this->data);
     }
 
+    public function loadingreportproductwise()
+    {
+        $this->breadcrumbs->unshift(1, 'Reports', 'admin/report');
+        $this->breadcrumbs->unshift(1, 'Stock', 'admin/report/Vastage Report');
+        $this->page_title->push(('Product Wise Report'));
+        $this->data['pagetitle'] = $this->page_title->show();
+        $this->data['breadcrumb'] = $this->breadcrumbs->show();
+        $this->data['salespersons'] = $this->Report_model->loademployee();
+
+        $this->template->admin_render('admin/report/loadingreportproductwise', $this->data);
+    }
+
 //    public function loadloadingreport()
 //    {
 //        $this->output->set_content_type('application/json');
@@ -2159,7 +2171,7 @@ public function loadreport1() {
             die;
         }
 
-        $this->db->select('d.SalesProductCode, d.SalesProductName,
+        $this->db->select('p.*,h.SalesInvNo,d.SalesProductCode, d.SalesProductName,
                   
                    SUM(d.SalesFreeQty) AS TotalSalesFreeQty,
                    
@@ -2192,6 +2204,375 @@ public function loadreport1() {
         echo json_encode($response);
         die;
     }
+
+    //
+//      public function loadloadingreportpro() {
+//         $this->output->set_content_type('application/json');
+
+//         $startdate = $this->input->post('startdate');
+//         $enddate = $this->input->post('enddate');
+//         $salesperson = $this->input->post('newsalesperson');
+//         $route = $this->input->post('route');
+//         $customer = $this->input->post('customer');
+       
+       
+//         $routeAr = isset($_POST['route_ar']) ? json_decode($_POST['route_ar']) : NULL;
+//         if (empty($startdate) || empty($enddate)) {
+//             echo json_encode(['error' => 'Start date or end date is missing.']);
+//             die;
+//         }
+
+//         $this->db->select('sd.Description,p.*,h.SalesInvNo,d.SalesProductCode, d.SalesProductName,
+//                   SUM(d.SalesFreeQty) AS TotalSalesFreeQty,
+//                     p.Prd_CostPrice, p.Prd_UPC,
+//                    SUM(CASE WHEN d.ReturnType = 0 THEN d.SalesQty ELSE 0 END) AS TotalSalesQty,
+//                     SUM(CASE WHEN d.ReturnType IN (1,2,3) THEN d.SalesQty ELSE 0 END) AS SalesReturnQty');
+//         $this->db->from('salesinvoicehed h');
+//         $this->db->join('salesinvoicedtl d', 'h.SalesInvNo = d.SalesInvNo');
+//        $this->db->join('product p', 'd.SalesProductCode = p.ProductCode AND p.Prd_IsActive = 1');
+//         $this->db->join('department sd','p.DepCode= sd.DepCode');
+//         $this->db->join('customer cus','h.SalesCustomer= cus.CusCode');
+        
+//         $this->db->where('h.SalesPerson',$salesperson);
+//        if (!empty($customer)) {
+//     if (is_array($customer)) {
+//         $this->db->where_in('h.SalesCustomer', $customer);
+//     } else {
+//         $this->db->where('h.SalesCustomer', $customer);
+//     }
+// }
+
+        
+//         if (!empty($routeAr)) {
+//             $this->db->where_in('h.RouteId', $routeAr);
+//         }
+//         $this->db->where('DATE(d.SalesInvDate) >=', $startdate);
+//         $this->db->where('DATE(d.SalesInvDate) <=', $enddate);
+//         $this->db->group_by('p.Prd_AppearName');
+       
+        
+//  $this->db->order_by('h.SalesInvNo');
+
+
+
+
+
+//         $query = $this->db->get();
+
+//         $result = $query->result();
+// usort($result, function ($a, $b) {
+//     // Extract numeric part from Description, default to large number if non-numeric
+//     $aNum = is_numeric(substr($a->Description, 0, 1)) ? intval($a->Description) : PHP_INT_MAX;
+//     $bNum = is_numeric(substr($b->Description, 0, 1)) ? intval($b->Description) : PHP_INT_MAX;
+
+//     return $aNum - $bNum;
+// });
+
+//         $response = [
+//             'startdate' => $startdate,
+//             'enddate' => $enddate,
+//             'salesperson' =>$salesperson,
+//             'route' =>$route,
+//             'data' => $result
+//         ];
+
+//         echo json_encode($response);
+//         die;
+//     }
+public function loadloadingreportpro()
+{
+
+    $this->output->set_content_type('application/json');
+    
+     $startdate = $this->input->post('startdate');
+        $enddate = $this->input->post('enddate');
+        $salesperson = $this->input->post('newsalesperson');
+        $route = $this->input->post('route');
+        $customer = $this->input->post('customer');
+
+        if($salesperson === "all"){
+            $routeAr = isset($_POST['route_ar']) ? json_decode($_POST['route_ar']) : NULL;
+        if (empty($startdate) || empty($enddate)) {
+            echo json_encode(['error' => 'Start date or end date is missing.']);
+            die;
+        }
+
+     $this->db->select('
+    sd.Description AS DeptDescription,
+    subd.Description AS SubDeptDescription,
+    p.*,
+    h.SalesInvNo,
+    d.SalesProductCode,
+    d.SalesProductName,
+    d.SalesFreeQty AS TotalSalesFreeQty,
+    p.Prd_CostPrice,
+    p.Prd_UPC,
+    (CASE WHEN d.ReturnType = 0 THEN d.SalesQty ELSE 0 END) AS TotalSalesQty,
+    (CASE WHEN d.ReturnType IN (1,2,3) THEN d.SalesQty ELSE 0 END) AS SalesReturnQty
+');
+
+$this->db->from('product p');
+
+// Left join to get invoice details if available
+$this->db->join('salesinvoicedtl d', 'p.ProductCode = d.SalesProductCode AND DATE(d.SalesInvDate) >= "' . $startdate . '" AND DATE(d.SalesInvDate) <= "' . $enddate . '"', 'left');
+$this->db->join('salesinvoicehed h', 'h.SalesInvNo = d.SalesInvNo', 'left');
+
+// Join other required tables
+$this->db->join('department sd', 'p.DepCode = sd.DepCode', 'left');
+$this->db->join('subdepartment subd', 'p.SubDepCode = subd.SubDepCode', 'inner');
+
+$this->db->join('customer cus', 'h.SalesCustomer = cus.CusCode', 'left');
+
+// Only active products
+$this->db->where('p.Prd_IsActive', 1);
+
+// Optional: group and order
+$this->db->group_by('p.ProductCode'); // use ProductCode instead of AppearName to avoid grouping issues
+$this->db->order_by('sd.Description ASC, subd.Description ASC, p.Prd_AppearName ASC');
+
+    $query = $this->db->get();
+ $results = $query->result();
+// echo json_encode($results);
+// die();
+$uniqueDescriptions = [];
+$uniqueItems = [];
+$groupedData = [];
+
+foreach ($results as $row) {
+    $billNo = $row->SalesInvNo;
+    
+   
+    $desc = $row->DeptDescription ;
+    $subdesc = $row->SubDeptDescription ;
+
+    
+
+    $itemName = explode('-', $row->Prd_AppearName)[0];
+    $qty = (int) $row->TotalSalesQty;
+    $freeqty = (int) $row->TotalSalesFreeQty;
+    $fulltotal = $qty + $freeqty;
+
+    $uniqueDescriptions[$desc] = true;
+    $uniqueItems[$itemName] = true;
+
+    if (!isset($groupedData[$billNo])) {
+        $groupedData[$billNo] = [];
+    }
+    if (!isset($groupedData[$billNo][$desc])) {
+        $groupedData[$billNo][$desc] = [];
+    }
+    if (!isset($groupedData[$billNo][$desc][$itemName])) {
+        $groupedData[$billNo][$desc][$itemName] = 0;
+    }
+
+    $groupedData[$billNo][$desc][$itemName] = $fulltotal;
+}
+
+
+    // If no data found, provide default headers
+    $uniqueDescriptionsList = array_keys($uniqueDescriptions);
+    // echo json_encode($uniqueDescriptionsList);die;
+    $uniqueItemsList = array_keys($uniqueItems);
+
+ 
+usort($uniqueDescriptionsList, function ($a, $b) {
+    preg_match('/\d+/', $a, $aMatch);
+    preg_match('/\d+/', $b, $bMatch);
+
+    $aNum = isset($aMatch[0]) ? (int)$aMatch[0] : PHP_INT_MAX;
+    $bNum = isset($bMatch[0]) ? (int)$bMatch[0] : PHP_INT_MAX;
+
+    if ($aNum == $bNum) {
+        return 0;
+    }
+    return ($aNum < $bNum) ? -1 : 1;
+});
+    if (empty($uniqueDescriptionsList)) {
+        $uniqueDescriptionsList = ['No Department'];
+    }
+
+    if (empty($uniqueItemsList)) {
+        $uniqueItemsList = ['No Item'];
+    }
+
+    $descriptionsMap = [];
+    foreach ($uniqueDescriptionsList as $desc) {
+        $descriptionsMap[$desc] = $uniqueItemsList;
+        
+    }
+
+    // Prepare rows
+    $rows = [];
+    if (!empty($groupedData)) {
+        foreach ($groupedData as $billNo => $descGroup) {
+            $row = [
+                'billNo' => $billNo,
+                'quantities' => []
+            ];
+
+            foreach ($uniqueDescriptionsList as $desc) {
+                $row['quantities'][$desc] = [];
+                foreach ($uniqueItemsList as $item) {
+                    $row['quantities'][$desc][$item] = isset($descGroup[$desc][$item])
+                        ? $descGroup[$desc][$item]
+                        : 0;
+                }
+            }
+
+            $rows[] = $row;
+        }
+    }
+
+    // Send response
+    echo json_encode([
+        'headers' => [
+            'uniqueDescriptions' => $uniqueDescriptionsList,
+            'uniqueItems' => $uniqueItemsList,
+            'descriptions' => $descriptionsMap
+        ],
+        'rows' => $rows
+    ]);
+
+    die;
+        }else{
+            $routeAr = isset($_POST['route_ar']) ? json_decode($_POST['route_ar']) : NULL;
+        if (empty($startdate) || empty($enddate)) {
+            echo json_encode(['error' => 'Start date or end date is missing.']);
+            die;
+        }
+
+        $this->db->select('sd.Description,p.*,h.SalesInvNo,d.SalesProductCode, d.SalesProductName,
+                  (d.SalesFreeQty) AS TotalSalesFreeQty,
+                    p.Prd_CostPrice, p.Prd_UPC,
+                   (CASE WHEN d.ReturnType = 0 THEN d.SalesQty ELSE 0 END) AS TotalSalesQty,
+                    (CASE WHEN d.ReturnType IN (1,2,3) THEN d.SalesQty ELSE 0 END) AS SalesReturnQty');
+        $this->db->from('salesinvoicehed h');
+        $this->db->join('salesinvoicedtl d', 'h.SalesInvNo = d.SalesInvNo');
+       $this->db->join('product p', 'd.SalesProductCode = p.ProductCode AND p.Prd_IsActive = 1');
+        $this->db->join('department sd','p.DepCode= sd.DepCode');
+        $this->db->join('customer cus','h.SalesCustomer= cus.CusCode');
+        
+        $this->db->where('h.SalesPerson',$salesperson);
+       if (!empty($customer)) {
+    if (is_array($customer)) {
+        $this->db->where_in('h.SalesCustomer', $customer);
+    } else {
+        $this->db->where('h.SalesCustomer', $customer);
+    }
+}
+  if (!empty($routeAr)) {
+            $this->db->where_in('h.RouteId', $routeAr);
+        }
+        $this->db->where('DATE(d.SalesInvDate) >=', $startdate);
+        $this->db->where('DATE(d.SalesInvDate) <=', $enddate);
+
+    $this->db->group_by(['h.SalesInvNo']);
+    $this->db->order_by('h.SalesInvNo');
+   $this->db->group_by('p.Prd_AppearName');
+    $query = $this->db->get();
+ $results = $query->result();
+// echo var_dump( $results );die;
+  
+ 
+  $uniqueDescriptions = [];
+    $uniqueItems = [];
+    $groupedData = [];
+
+    foreach ($results as $row) {
+        $billNo = $row->SalesInvNo;
+        $desc = $row->Description;
+        $itemName = explode('-', $row->Prd_AppearName)[0];
+        $qty = (int) $row->TotalSalesQty;
+        $freeqty = (int) $row->TotalSalesFreeQty;
+
+        $fulltotal = $qty + $freeqty;
+
+        $uniqueDescriptions[$desc] = true;
+        $uniqueItems[$itemName] = true;
+
+        if (!isset($groupedData[$billNo])) {
+            $groupedData[$billNo] = [];
+        }
+        if (!isset($groupedData[$billNo][$desc])) {
+            $groupedData[$billNo][$desc] = [];
+        }
+        if (!isset($groupedData[$billNo][$desc][$itemName])) {
+            $groupedData[$billNo][$desc][$itemName] = 0;
+        }
+
+        $groupedData[$billNo][$desc][$itemName]= $fulltotal;
+    }
+
+    // If no data found, provide default headers
+    $uniqueDescriptionsList = array_keys($uniqueDescriptions);
+    $uniqueItemsList = array_keys($uniqueItems);
+usort($uniqueDescriptionsList, function ($a, $b) {
+    preg_match('/\d+/', $a, $aMatch);
+    preg_match('/\d+/', $b, $bMatch);
+
+    $aNum = isset($aMatch[0]) ? (int)$aMatch[0] : PHP_INT_MAX;
+    $bNum = isset($bMatch[0]) ? (int)$bMatch[0] : PHP_INT_MAX;
+
+    if ($aNum == $bNum) {
+        return 0;
+    }
+    return ($aNum < $bNum) ? -1 : 1;
+});
+    if (empty($uniqueDescriptionsList)) {
+        $uniqueDescriptionsList = ['No Department'];
+    }
+
+    if (empty($uniqueItemsList)) {
+        $uniqueItemsList = ['No Item'];
+    }
+
+    $descriptionsMap = [];
+    foreach ($uniqueDescriptionsList as $desc) {
+        $descriptionsMap[$desc] = $uniqueItemsList;
+    }
+
+    // Prepare rows
+    $rows = [];
+    if (!empty($groupedData)) {
+        foreach ($groupedData as $billNo => $descGroup) {
+            $row = [
+                'billNo' => $billNo,
+                'quantities' => []
+            ];
+
+            foreach ($uniqueDescriptionsList as $desc) {
+                $row['quantities'][$desc] = [];
+                foreach ($uniqueItemsList as $item) {
+                    $row['quantities'][$desc][$item] = isset($descGroup[$desc][$item])
+                        ? $descGroup[$desc][$item]
+                        : 0;
+                }
+            }
+
+            $rows[] = $row;
+        }
+    }
+
+    // Send response
+    echo json_encode([
+        'headers' => [
+            'uniqueDescriptions' => $uniqueDescriptionsList,
+            'uniqueItems' => $uniqueItemsList,
+            'descriptions' => $descriptionsMap
+        ],
+        'rows' => $rows
+    ]);
+
+    die;
+        }
+       
+       
+        
+}
+
+
+
+
 
     public function routewisereport()
     {

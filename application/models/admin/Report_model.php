@@ -27,6 +27,7 @@ class Report_model extends CI_Model {
     public function loademployee(){
         $this->db->select();
         $this->db->from('salespersons');
+        $this->db->where('IsActive',1);
         return $this->db->get()->result();
     }
 

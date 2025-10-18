@@ -4455,7 +4455,7 @@ public function all_delivery_note() {
        
         $routeAr = isset($_POST['route']) ? json_decode($_POST['route']) : NULL;
 
-        $this->datatables->select('tempsalesinvoicehed.*, salespersons.RepName, customer_routes.name,customer_routes.id');
+        $this->datatables->select('tempsalesinvoicehed.*,customer.cusName, salespersons.RepName, customer_routes.name,customer_routes.id');
         $this->datatables->from('tempsalesinvoicehed');
         $this->datatables->join('customer', 'customer.CusCode = tempsalesinvoicehed.customerId');
         $this->datatables->join('customer_routes', 'customer_routes.id = customer.RouteId');
@@ -4484,49 +4484,46 @@ public function all_delivery_note() {
         echo $this->datatables->generate();
         die();
     }
-  public function view_sales_pre_orders($inv = null) {
-    $this->load->model('admin/Salesinvoice_model');
-    $invNo = base64_decode($inv);
+public function view_sales_pre_orders($inv=null) {
 
-    // Title Page
-    $this->page_title->push('Sales Invoice');
-    $this->data['pagetitle'] = 'Sales Invoice - ' . $invNo;
+        $this->load->model('admin/Salesinvoice_model');
+        $invNo=base64_decode($inv);
+        /* Title Page */
 
-    // Breadcrumbs
-    $this->breadcrumbs->unshift(1, 'Sales', 'admin/sales/');
-    $this->breadcrumbs->unshift(1, 'Sales Invoice', 'admin/sales/view_sales_invoice');
-    $this->data['breadcrumb'] = $this->breadcrumbs->show();
 
-    // Get location from tempsalesinvoicehed table
-    $location = $this->db->select('location')
-                         ->from('tempsalesinvoicehed')
-                         ->where('tempInvNo', $invNo)
-                         ->get()
-                         ->row()
-                         ->location;
+        $this->page_title->push('Sales Invoice');
+        $this->data['pagetitle'] = 'Sales Invoice-'.$invNo;
 
-    // Get company data based on location
-    $id3 = array('CompanyID' => $location);
-    $this->data['company'] = $this->Job_model->get_data_by_where('company', $id3);
+        /* Breadcrumbs */
+        $this->breadcrumbs->unshift(1, 'Sales', 'admin/sales/');
+        $this->breadcrumbs->unshift(1, 'Sales Invoice', 'admin/sales/view_sales_invoice');
+        $this->data['breadcrumb'] = $this->breadcrumbs->show();
 
-    // Get order header with customer info
-    $this->data['orderHead'] = $this->db->select('tempsalesinvoicehed.*, customer.DisplayName, customer.MobileNo, customer.LanLineNo')
-                                       ->from('tempsalesinvoicehed')
-                                       ->join('customer', 'customer.CusCode = tempsalesinvoicehed.customerId')
-                                       ->where('tempInvNo', $invNo)
-                                       ->get()
-                                       ->row();
+        $location = $this->db->select('location')->from('tempsalesinvoicehed')->where('tempInvNo', $invNo)->get()->row()->location;
 
-    // Get order details
-    $this->data['orderDtls'] = $this->db->select('tempsalesinvoiceheddtl.*')
-                                       ->from('tempsalesinvoiceheddtl')
-                                       ->where('tempInvoiceNo', $invNo)
-                                       ->get()
-                                       ->result();
+        $id3 = array('CompanyID' => $location);
+        $this->data['company'] = $this->Job_model->get_data_by_where('company', $id3);
 
-    // Render template
-    $this->template->admin_render('admin/sales/view-sales-pre-orders', $this->data);
-}
+        // $this->data['orderHead'] = $this->db->select('tempsalesinvoicehed.*,customer.DisplayName,customer.MobileNo,customer.LanLineNo')->from('tempsalesinvoicehed')
+        //         ->join('customer','customer.CusCode=tempsalesinvoicehed.customerId')
+                
+                 $this->data['orderHead'] = $this->db->select('tempsalesinvoicehed.*,customer.DisplayName,customer.MobileNo,customer.LanLineNo,salespersons.RepName')->from('tempsalesinvoicehed')
+                ->join('customer','customer.CusCode=tempsalesinvoicehed.customerId')
+                
+                //   ->join('salespersons','salespersons.RepID=tempsalesinvoicehed.salesPerson')
+->join('salespersons','salespersons.RepID=customer.HandelBy')
+              
+                
+                ->where('tempInvNo', $invNo)
+                ->get()->row();
+        
+        $this->data['orderDtls'] = $this->db->select('tempsalesinvoiceheddtl.*')->from('tempsalesinvoiceheddtl')
+            ->where('tempInvoiceNo', $invNo)
+            ->get()->result();
+        
+        $this->template->admin_render('admin/sales/view-sales-pre-orders', $this->data);
+
+    }
 
     public function view_sales_Free_qty($inv = null) {
 
