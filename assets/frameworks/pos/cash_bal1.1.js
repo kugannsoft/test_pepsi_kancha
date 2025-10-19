@@ -138,6 +138,7 @@ $(document).ready(function() {
                     success: function(data)
                     {
                         var resultData = JSON.parse(data);
+                        console.log('cash float',resultData);
                         var feedback = resultData['fb'];
                         var invNumber = resultData['InvNo'];
                         var cancelNo = resultData['CancelNo'];

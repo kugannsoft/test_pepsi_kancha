@@ -861,39 +861,37 @@ class Customer extends Admin_Controller {
     }
 
     public function findemploeeroute() {
-        $salespersonID = $this->input->post('salespersonID');
-        $this->load->database();
-        $this->db->select('er.route_id, cr.name');
-        $this->db->from('employeeroutes er');
-        $this->db->join('customer_routes cr', 'er.route_id = cr.id');
-        $this->db->where('er.emp_id', $salespersonID);
-        $query = $this->db->get();
-        // $routes = $query->result_array();
-        // echo json_encode($routes);
-        // exit();
-        $routes = [];
-
-        
-        if ($query->num_rows() > 0) {
-      
-            foreach ($query->result() as $row) {
-                $routes[] = [
-                    'route_id' => $row->route_id,
-                    'route_name' => $row->name
-                ];
-            }
-
-         
-            echo json_encode($routes);
-        } else {
-         
-            echo json_encode([]);
-        }
-
+    $salespersonID = $this->input->post('salespersonID');
+    $this->load->database();
     
-        exit();
-
+    $this->db->select('er.route_id, cr.name');
+    $this->db->from('employeeroutes er');
+    $this->db->join('customer_routes cr', 'er.route_id = cr.id');
+    // $this->db->join('salespersons sp', 'er.emp_id = sp.RepID');
+    //  $this->db->where('sp.isActive', 1);
+    
+    
+    // If salespersonID is not 'all', apply the WHERE condition
+    if ($salespersonID !== 'all') {
+        $this->db->where('er.emp_id', $salespersonID);
     }
+
+    $query = $this->db->get();
+
+    $routes = [];
+
+    if ($query->num_rows() > 0) {
+        foreach ($query->result() as $row) {
+            $routes[] = [
+                'route_id' => $row->route_id,
+                'route_name' => $row->name
+            ];
+        }
+    }
+
+    echo json_encode($routes);
+    exit();
+}
 
 
 }

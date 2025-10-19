@@ -67,13 +67,14 @@ class Cash_model extends CI_Model {
         
     }
     
-    public function saveCashFloat($table,$float) {
+   public function saveCashFloat($table,$float) {
         $this->db->trans_start();
         $this->db->insert($table,$float);
         $this->db->trans_complete();
         return $this->db->trans_status();
         
     }
+    
     
     public function getActiveInvoies($table, $q,$location) {
         $this->db->select('InvNo');
